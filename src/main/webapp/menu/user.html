@@ -1,0 +1,312 @@
+<!-- Fixed navbar -->
+    <div ng-show="$root.user" class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="HeaderController">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#/" translate="global.title"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            		<i class="fa fa-fw fa-group"></i> <span translate="hr.employees"></span><b class="caret"></b>
+            	</a>
+            	<ul class="dropdown-menu">
+		            <li ng-class="{ active: isActive('/employees((/new)(/.*)?)?$')|| isActive('/employees/edit/[0-9]+(/.*)?$')}">
+		            	<a href="#/employees"><i class="fa fa-fw fa-group"></i> {{ 'hr.employees' | translate }}</a>
+		            </li>
+		            <li ng-class="{ active: isActive('/employees(/[0-9]+)?/employment(/[0-9]+)?$')}">
+		            	<a href="#/employees/employment"><i class="fa fa-fw fa-group"></i> {{ 'hr.employment' | translate }}</a>
+		            </li>
+		            <li class="divider"></li>
+		            <li ng-class="{ active: isActive('/extemployees((/new)(/.*)?)?$')|| isActive('/extemployees/edit/[0-9]+(/.*)?$')}">
+		            	<a href="#/extemployees"><i class="fa fa-fw fa-group"></i> {{ 'hr.external_employees' | translate }}</a>
+		            </li>
+		            <li ng-class="{ active: isActive('/extemployees(/[0-9]+)?/employment(/[0-9]+)?$')}">
+		            	<a href="#/extemployees/employment"><i class="fa fa-fw fa-group"></i> {{ 'hr.external_employee_employment' | translate }}</a>
+		            </li>
+            	</ul>
+         	</li>
+            
+            
+            
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            		<i class="fa fa-fw fa-sitemap"></i> <span translate="hr.organization_structure"></span><b class="caret"></b>
+            	</a>
+            	<ul class="dropdown-menu">
+		            <li ng-class="{ active: isActive('/boards')}">
+		            	<a href="#/boards">
+		            		<i class="fa fa-fw fa-building-o"></i> {{ 'hr.boards' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/departments')}">
+		            	<a href="#/departments">
+		            		<i class="fa fa-fw fa-th-large"></i> {{ 'hr.departments' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/branchoffices')}">
+		            	<a href="#/branch-offices">
+		            		<i class="fa fa-fw fa-code-fork"></i> {{ 'hr.branch_offices' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/working-positions')}">
+		            	<a href="#/working-positions">
+		            		<i class="fa fa-fw fa-cubes"></i> {{ 'hr.working_positions' | translate }}
+		            	</a>
+	            	</li>	            	
+            	</ul>
+            </li>
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            		<i class="fa fa-fw fa-university"></i> <span translate="hr.recruitment"></span><b class="caret"></b>
+            	</a>
+            	<ul class="dropdown-menu">
+		            <li ng-class="{ active: isActive('/recruitment/external')}">
+		            	<a href="#/recruitment/external">
+		            		<i class="fa fa-fw fa-external-link"></i> {{ 'hr.external_recruitment' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/recruitment/external/list')}">
+		            	<a href="#/recruitment/external/list">
+		            		<i class="fa fa-fw fa-th-list"></i> {{ 'hr.external_recruitment_list' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/recruitment/internal')}">
+		            	<a href="#/recruitment/internal">
+		            		<i class="fa fa-fw fa-building-o"></i> {{ 'hr.internal_recruitment' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/recruitment/internal/list')}">
+		            	<a href="#/recruitment/internal/list">
+		            		<i class="fa fa-fw fa-th-list"></i> {{ 'hr.internal_recruitment_list' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/recruitment/internships')}">
+		            	<a href="#/recruitment/internships">
+		            		<i class="fa fa-fw fa-code-fork"></i> {{ 'hr.internships' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/recruitment/internship/list')}">
+		            	<a href="#/recruitment/internship/list">
+		            		<i class="fa fa-fw fa-th-list"></i> {{ 'hr.internships_list' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/recruitment/statuses')}">
+		            	<a href="#/recruitment/statuses">
+		            		<i class="fa fa-fw fa-code-fork"></i> {{ 'hr.recruitment_statuses' | translate }}
+		            	</a>
+	            	</li>
+            	</ul>
+            </li>
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            		<i class="fa fa-fw fa-car"></i> <span translate="hr.travel_orders"></span><b class="caret"></b>
+            	</a>
+            	<ul class="dropdown-menu">
+		            <li ng-class="{ active: isActive('/tickettypes')}">
+		            	<a href="#/tickettypes">
+		            		<i class="fa fa-fw fa-ticket"></i> {{ 'hr.ticket_type' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/transportationserviceclasses')}">
+		            	<a href="#/transportationserviceclasses">
+		            		<i class="fa fa-fw fa-plane"></i> {{ 'hr.transportation_service_class' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/transportationtypes')}">
+		            	<a href="#/transportationtypes">
+		            		<i class="fa fa-fw fa-truck"></i> {{ 'hr.transportation_type' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/travelapprovaltypes')}">
+		            	<a href="#/travelapprovaltypes">
+		            		<i class="fa fa-fw fa-tags"></i> {{ 'hr.travel_approval_type' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/vehicletypes')}">
+		            	<a href="#/vehicletypes">
+		            		<i class="fa fa-fw fa-cab"></i> {{ 'hr.vehicle_type' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/travelorder')}">
+		            	<a href="#/travelorder">
+		            		<i class="fa fa-fw fa-th-list"></i> {{ 'hr.travel_order' | translate }}
+		            	</a>
+	            	</li>
+	           </ul>
+           </li>
+           <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            		<i class="fa fa-fw fa-university"></i> <span translate="hr.training"></span><b class="caret"></b>
+            	</a>
+            	<ul class="dropdown-menu">
+		            <li ng-class="{ active: isActive('/training/calls')}">
+		            	<a href="#/training/calls">
+		            		<i class="fa fa-fw fa-external-link"></i> {{ 'hr.training_calls' | translate }}
+		            	</a>
+	            	</li>
+	            	<li ng-class="{ active: isActive('/training/list')}">
+		            	<a href="#/training/list">
+		            		<i class="fa fa-fw fa-external-link"></i> {{ 'hr.training_calls_list' | translate }}
+		            	</a>
+	            	</li>	            	
+	            	<li ng-class="{ active: isActive('/training/statuses')}">
+		            	<a href="#/training/statuses">
+		            		<i class="fa fa-fw fa-code-fork"></i> {{ 'hr.training_statuses' | translate }}
+		            	</a>
+	            	</li>
+            	</ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              	<i class="fa fa-fw fa-gear"></i> <span translate="hr.admin"></span><b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+              	<li ng-class="{ active: isActive('/users')}">
+	            	<a href="#/users"><i class="fa fa-fw fa-globe"></i> {{ 'hr.users' | translate }}</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/user_roles')}">
+	            	<a href="#/user_roles"><i class="fa fa-fw fa-globe"></i> {{ 'hr.user_roles' | translate }}</a>
+            	</li>
+	            <li ng-class="{ active: isActive('/cities')}">
+	            	<a href="#/cities"><i class="fa fa-fw fa-globe"></i> {{ 'hr.city' | translate }}</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/companies')}">
+	            	<a href="#/companies"><i class="fa fa-fw fa-globe"></i> {{ 'hr.company' | translate }}</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/companytypes')}">
+	            	<a href="#/companytypes"><i class="fa fa-fw fa-globe"></i> {{ 'hr.companyType' | translate }}</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/contacttypes')}">
+	            	<a href="#/contacttypes"><i class="fa fa-fw fa-globe"></i> {{ 'hr.contactType' | translate }}</a>
+            	</li>
+	            <li ng-class="{ active: isActive('/countries')}">
+	            	<a href="#/countries"><i class="fa fa-fw fa-flag"></i> {{ 'hr.country' | translate }}</a>
+            	</li>
+            	<li ng-class="{ active: isActive('currencies')}">
+	            	<a href="#/currencies"><i class="fa fa-fw fa-money"></i> {{ 'hr.currency' | translate }}</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/educationalinstitutions')}">
+	            	<a href="#/educationalinstitutions">
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.educationalInstitution' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/educationfields')}">
+	            	<a href="#/educationfields" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.educationField' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/educationtypes')}">
+	            	<a href="#/educationtypes" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.educationType' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/employmentstatuses')}">
+	            	<a href="#/employmentstatuses" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.employmentStatus' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/employmenttypes')}">
+	            	<a href="#/employmenttypes" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.employmentType' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/terminationreasons')}">
+	            	<a href="#/terminationreasons" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.terminationReason' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/foreignlanguages')}">
+	            	<a href="#/foreignlanguages" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.foreignLanguage' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/maritalstatuses')}">
+	            	<a href="#/maritalstatuses" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.maritalStatus' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/municipalities')}">
+	            	<a href="#/municipalities" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.municipality' | translate }}
+	            	</a>
+            	</li>
+	            <li ng-class="{ active: isActive('/nationalities')}">
+	            	<a href="#/nationalities" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.nationality' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/pensionfunds')}">
+	            	<a href="#/pensionfunds" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.pensionFund' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/pensionfundtypes')}">
+	            	<a href="#/pensionfundtypes" >
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.pensionFundType' | translate }}
+	            	</a>
+            	</li>
+            	<li ng-class="{ active: isActive('/religions')}">
+	            	<a href="#/religions">
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.religion' | translate }}
+	            	</a>
+            	</li>
+            	
+            	<li ng-class="{ active: isActive('/taxreliefs')}">
+	            	<a href="#/taxreliefs">
+	            		<i class="fa fa-fw fa-money"></i> {{ 'hr.taxrelief' | translate }}
+	            	</a>
+            	</li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+            <li class="dropdown" ng-controller="LanguageController">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                <span>
+	                    <i class="fa fa-fw fa-flag"></i>
+	                    <span class="hidden-tablet" translate="generic.language"></span>
+	                    <b class="caret"></b>
+	                </span>
+	            </a>
+	            <ul class="dropdown-menu">
+	                <li active-menu="en">
+	                    <a ng-click="changeLanguage(&apos;en&apos;)">
+	                    	<span class="famfamfam-flag-gb"></span>&nbsp;<span translate="generic.en"></span></a>
+	                </li>                            
+	                <li active-menu="mk">
+	                    <a ng-click="changeLanguage(&apos;mk&apos;)">
+	                    <span class="famfamfam-flag-mk"></span>&nbsp;<span translate="generic.mk"></span></a>
+	                </li>
+	            </ul>
+           	</li>
+           	<li class="dropdown">
+           		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="fa fa-user fa-fw"></i> {{$root.user.name }}<span class="caret"></span>
+				</a>
+           		
+	            <ul class="dropdown-menu">
+	            	<li>
+		                <a href="#" ng-click="logout()">
+		                	<i class="fa fa-sign-out fa-fw"></i> {{ 'logout' | translate }}
+	                	</a>
+                	</li>
+                </ul>
+             </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+	           
