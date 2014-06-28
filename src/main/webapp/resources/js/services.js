@@ -30,3 +30,7 @@ WP.factory('Author', ['$resource', function($resource) {
   return $resource(WPUtil.ctx('/data/rest/authors/:id'), {});
 }]);
 
+WP.factory('Conference', ['$resource', function($resource) {
+	  return $resource(WPUtil.ctx('/data/rest/conferences/:id'), {});
+	}]);
+

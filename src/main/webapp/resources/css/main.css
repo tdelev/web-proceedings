@@ -2,3 +2,9 @@ body {
 	min-height: 2000px;
 	padding-top: 70px;
 }
+.ng-dirty.ng-valid{
+	border-color:#fa787e;
+}
+.ng-dirty.ng-invalid{
+	border-color:#78fa89;
+}

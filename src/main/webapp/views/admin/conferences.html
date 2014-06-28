@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h1>Conferences</h1>
+</div>
+<div class="row">
+<div class="col-md-6">
+ <form role="form" name="conferenceForm" ng-submit="saveConference()" novalidate>
+  <div class="form-group" >
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" placeholder="Enter title" ng-model="conference.title" required>
+  </div>
+  <div class="form-group">
+    <label for="topic">Topic</label>
+    <input type="text" class="form-control" id="topic" placeholder="Enter topic" ng-model="conference.topic" required>
+  </div>
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input type="date" class="form-control" id="date" placeholder="Enter date" ng-model="conference.date" required>
+  </div>
+  <div class="form-group">
+    <label for="venue">Venue</label>
+    <input type="text" class="form-control" id="venue" placeholder="Enter venue" ng-model="conference.venue" required>
+  </div>
+ 
+  <button type="submit" class="btn btn-primary" ng-disabled="!conferenceForm.$valid" >Submit</button>
+</form>
+
+</div>
+<div class="col-md-6">
+  <table class="table table-condensed table-striped table-bordered" ng-show="conferences.length">
+  <tr>
+  <th>Title</th><th>Topic</th><th>Date</th><th>Venue</th><th>Edit</th><th>Delete</th>
+  </tr>
+  <tr ng-repeat="conference in conferences">
+	  <td>{{conference.title}}</td>
+	  <td>{{conference.topic}}</td>
+	  <td>{{conference.date}}</td>
+	  <td>{{conference.venue}}</td>
+	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getConference(conference.id)">Edit</button></td>
+	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteConference(conference.id)">Delete</button></td>
+  </tr>
+  </table>
+  </div>
+</div>
