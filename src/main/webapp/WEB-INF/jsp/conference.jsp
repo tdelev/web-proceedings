@@ -11,8 +11,10 @@
 	<jsp:include page="fragments/menu.jsp"/>
 	
     <div class="container">
-      	 <c:forEach var="conf" items="${conferences}">
-      	 	<h2><a href="${pageContext.request.contextPath}/conference/${conf.id}/${conf.titleSlug}">${conf.title}</a></h2>
+    	<h2>${conference.title}</h2>
+    	<h3>Papers</h3>
+      	 <c:forEach var="paper" items="${papers}">
+      	 	<h4><a href="${pageContext.request.contextPath}/${paper.conference.titleSlug}/${paper.id}/${paper.titleSlug}">${paper.title}</a></h4>
       	 </c:forEach>
 
     </div> <!-- /container -->

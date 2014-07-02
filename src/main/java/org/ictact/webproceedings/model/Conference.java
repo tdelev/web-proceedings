@@ -6,23 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.ictact.webproceedings.util.SlugGenerator;
 
 @Entity
 @Table(name = "conferences")
-public class Conference extends BaseEntity{
-	
+public class Conference extends BaseEntity {
+
 	@NotEmpty
 	private String title;
-	
+
 	@NotEmpty
 	private String topic;
-	
+
 	@NotEmpty
 	private Date date;
-	
+
 	@NotEmpty
 	private String venue;
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -55,6 +56,8 @@ public class Conference extends BaseEntity{
 		this.venue = venue;
 	}
 
-	
-	
+	public String getTitleSlug() {
+		return SlugGenerator.toSlug(this.title);
+	}
+
 }

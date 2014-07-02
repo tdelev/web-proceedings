@@ -27,7 +27,7 @@
 	<mvc:resources mapping="/webjars/**"
 		location="classpath:/META-INF/resources/webjars/" />
 
-	<mvc:view-controller path="/" view-name="index" />
+	<mvc:view-controller path="/admin" view-name="admin" />
 
 	<!-- serve static resources (*.html, ...) from src/main/webapp/ -->
 	<mvc:default-servlet-handler />
