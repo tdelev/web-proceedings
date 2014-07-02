@@ -4,25 +4,34 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.ictact.webproceedings.util.CustomLocalDateSerializer;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "conferences")
-public class Conference extends BaseEntity{
-	
+public class Conference extends BaseEntity {
+
 	@NotEmpty
 	private String title;
-	
+
 	@NotEmpty
 	private String topic;
-	
-	@NotEmpty
-	private Date date;
-	
+
+	@NotNull
+	@JsonSerialize(using=CustomLocalDateSerializer.class)
+	private Date dateFrom;
+
+	@NotNull
+	@JsonSerialize(using=CustomLocalDateSerializer.class)
+	private Date dateTo;
+
 	@NotEmpty
 	private String venue;
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -39,12 +48,20 @@ public class Conference extends BaseEntity{
 		this.topic = topic;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDateFrom() {
+		return dateFrom;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateFrom(Date dateFrom) {
+		this.dateFrom = dateFrom;
+	}
+
+	public Date getDateTo() {
+		return dateTo;
+	}
+
+	public void setDateTo(Date dateTo) {
+		this.dateTo = dateTo;
 	}
 
 	public String getVenue() {
@@ -55,6 +72,4 @@ public class Conference extends BaseEntity{
 		this.venue = venue;
 	}
 
-	
-	
 }

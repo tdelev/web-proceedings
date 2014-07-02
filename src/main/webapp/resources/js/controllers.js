@@ -82,3 +82,31 @@ WP.controller('ConferencesController', [ '$scope', 'Conference',
 			};
 
 		} ]);
+
+WP.controller('PaperTypeController', [ '$scope', 'PaperType',
+                                 		function($scope, PaperType) {
+                                 			$scope.paperType = {};
+                                 			$scope.types = PaperType.query();
+                                 			$scope.savePaperType = function() {
+                                 				PaperType.save($scope.paperType, function(paperType) {
+                                 					$scope.types = PaperType.query();
+                                 					$scope.paperType = {};
+                                 				});
+                                 			};
+
+                                 			$scope.getType = function(id) {
+                                 				$scope.conference = PaperType.get({
+                                 					id : id
+                                 				});
+                                 			};
+                                 			$scope.deleteType = function(id) {
+                                 				PaperType.remove({
+                                 					id : id
+                                 				}, function() {
+                                 					$scope.types = PaperType.query();
+                                 					$scope.paperType = {};
+                                 				});
+
+                                 			};
+
+                                 		} ]);

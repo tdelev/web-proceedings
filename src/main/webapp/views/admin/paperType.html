@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>PaperType</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+  <form role="form" name="paperTypeForm" ng-submit="savePaperType()" novalidate>
+  <div class="form-group" >
+    <label for="name">Paper type</label>
+    <input type="text" class="form-control" id="name" placeholder="Enter paper type" ng-model="paperType.name" required>
+  </div>
+   <button type="submit" class="btn btn-primary" ng-disabled="!paperTypeForm.$valid">Submit</button>
+</form>
+  </div>
+  <div class="col-md-6" >
+  <table class="table table-condensed table-striped table-bordered" ng-show="types.length">
+  <tr>
+  <th>Id</th><th>Paper type</th><th>Edit</th><th>Delete</th>
+  </tr>
+  <tr ng-repeat="paperType in types">
+	  <td>{{paperType.id}}</td>
+	  <td>{{paperType.name}}</td>
+	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getType(paperType.id)">Edit</button></td>
+	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteType(paperType.id)">Delete</button></td>
+  </tr>
+  </table>
+  </div>
+</div>
