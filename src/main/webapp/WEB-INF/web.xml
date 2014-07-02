@@ -35,7 +35,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<!-- - Servlet that dispatches request to registered handlers (Controller 
 		implementations). -->
 	<servlet>
-		<servlet-name>hr</servlet-name>
+		<servlet-name>web-proceedings</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -45,7 +45,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>hr</servlet-name>
+		<servlet-name>web-proceedings</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
@@ -73,7 +73,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<filter-mapping>
 		<filter-name>httpMethodFilter</filter-name>
-		<servlet-name>hr</servlet-name>
+		<servlet-name>web-proceedings</servlet-name>
 	</filter-mapping>
 
 	<!-- used to provide the ability to enter Chinese characters inside the 
