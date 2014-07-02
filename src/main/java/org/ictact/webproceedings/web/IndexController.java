@@ -34,7 +34,7 @@ public class IndexController {
 		return new ModelAndView("index", "conferences", conferences);
 	}
 
-	@RequestMapping(value = "/conference/{conferenceId}/", method = RequestMethod.GET)
+	@RequestMapping(value = "/conference/{conferenceId}/{\\S+}", method = RequestMethod.GET)
 	public ModelAndView conference(@PathVariable Long conferenceId) {
 		Conference conf = confService.findById(conferenceId);
 		List<Paper> papers = new ArrayList<Paper>(paperService.findAll());
