@@ -44,9 +44,11 @@ public class IndexController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/{conferenceTitle:[a-zA-Z0-9-]+}/{paperId}/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{conferenceTitle:[a-zA-Z0-9-]+}/paper/{paperId:\\d+}/{\\S+}", method = RequestMethod.GET)
 	public ModelAndView paper(@PathVariable String conferenceTitle, @PathVariable Long paperId) {
+		Paper paper = paperService.findById(paperId);
 		ModelAndView result = new ModelAndView("paper");
+		result.addObject("paper", paper);
 		return result;
 	}
 
