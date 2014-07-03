@@ -34,9 +34,9 @@ WP.controller('AuthorsController', [ '$scope', 'Author',
 			$scope.authors = Author.query();
 			$scope.saveAuthor = function() {
 				Author.save($scope.author, function(author) {
-
 					$scope.authors = Author.query();
 					$scope.author = {};
+					$scope.authorForm.$setPristine();
 				});
 
 			};
@@ -63,6 +63,7 @@ WP.controller('ConferencesController', [ '$scope', 'Conference',
 				Conference.save($scope.conference, function(conference) {
 					$scope.conferences = Conference.query();
 					$scope.conference = {};
+					$scope.conferenceForm.$setPristine();
 				});
 			};
 
@@ -84,29 +85,60 @@ WP.controller('ConferencesController', [ '$scope', 'Conference',
 		} ]);
 
 WP.controller('PaperTypeController', [ '$scope', 'PaperType',
-                                 		function($scope, PaperType) {
-                                 			$scope.paperType = {};
-                                 			$scope.types = PaperType.query();
-                                 			$scope.savePaperType = function() {
-                                 				PaperType.save($scope.paperType, function(paperType) {
-                                 					$scope.types = PaperType.query();
-                                 					$scope.paperType = {};
-                                 				});
-                                 			};
+		function($scope, PaperType) {
+			$scope.paperType = {};
+			$scope.types = PaperType.query();
+			$scope.savePaperType = function() {
+				PaperType.save($scope.paperType, function(paperType) {
+					$scope.types = PaperType.query();
+					$scope.paperType = {};
+					$scope.paperTypeForm.$setPristine();
+				});
+			};
 
-                                 			$scope.getType = function(id) {
-                                 				$scope.conference = PaperType.get({
-                                 					id : id
-                                 				});
-                                 			};
-                                 			$scope.deleteType = function(id) {
-                                 				PaperType.remove({
-                                 					id : id
-                                 				}, function() {
-                                 					$scope.types = PaperType.query();
-                                 					$scope.paperType = {};
-                                 				});
+			$scope.getType = function(id) {
+				$scope.paperType = PaperType.get({
+					id : id
+				});
+			};
+			$scope.deleteType = function(id) {
+				PaperType.remove({
+					id : id
+				}, function() {
+					$scope.types = PaperType.query();
+					$scope.paperType = {};
+				});
 
-                                 			};
+			};
 
-                                 		} ]);
+		} ]);
+WP.controller('PaperController', [ '$scope', 'Paper','Conference','PaperType',
+		function($scope, Paper,Conference,PaperType) {
+			$scope.paper = {};
+			$scope.papers = Paper.query();
+			$scope.conferences=Conference.query();
+			$scope.types=PaperType.query();
+			$scope.savePaper = function() {
+				Paper.save($scope.paper, function(paper) {
+					$scope.papers = Paper.query();
+					$scope.paper = {};
+					$scope.papersForm.$setPristine();
+				});
+			};
+
+			$scope.getPaper = function(id) {
+				$scope.paper = Paper.get({
+					id : id
+				});
+			};
+			$scope.deletePaper = function(id) {
+				Paper.remove({
+					id : id
+				}, function() {
+					$scope.papers = Paper.query();
+					$scope.paper = {};
+				});
+
+			};
+
+		} ]);

@@ -34,6 +34,6 @@ WP.factory('Conference', ['$resource', function($resource) {
 	  return $resource(WPUtil.ctx('/data/rest/conferences/:id'), {});
 	}]);
 WP.factory('PaperType', ['$resource', function($resource) {
-	  return $resource(WPUtil.ctx('/data/rest/paperType/:id'), {});
+	  return $resource(WPUtil.ctx('/data/rest/paperTypes/:id'), {});
 	}]);
 

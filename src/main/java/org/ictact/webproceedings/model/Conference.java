@@ -7,9 +7,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
 import org.ictact.webproceedings.util.CustomLocalDateSerializer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import org.ictact.webproceedings.util.SlugGenerator;
@@ -79,6 +79,7 @@ public class Conference extends BaseEntity {
 	}
 
 
+	@JsonIgnore
 	public String getTitleSlug() {
 		return SlugGenerator.toSlug(this.title);
 	}

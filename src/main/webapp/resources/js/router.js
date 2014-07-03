@@ -9,15 +9,16 @@ WP.config([ '$routeProvider', '$locationProvider',
 				controller : LoginController
 			}).when('/about', {
 				templateUrl : 'views/about.html'
-			}).when('/admin/authors', {
+			}).when('/authors', {
 				templateUrl : 'views/admin/authors.html',
 				controller : 'AuthorsController'
-			}).when('/admin/conferences', {
+			}).when('/conferences', {
 				templateUrl : 'views/admin/conferences.html',
 				controller : 'ConferencesController'
-			}).when('/admin/papers', {
-				templateUrl: 'views/admin/papers.html'
-			}).when('/admin/paperType', {
+			}).when('/papers', {
+				templateUrl: 'views/admin/papers.html',
+				controller: 'PaperController'
+			}).when('/paperTypes', {
 				templateUrl: 'views/admin/paperType.html',
 				controller : 'PaperTypeController'
 			}).otherwise({

@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.ictact.webproceedings.util.SlugGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,19 +19,32 @@ public class Paper extends BaseEntity {
 
 	@Column(length = 1000)
 	private String paperAbstract;
-	
+
 	@ManyToOne
 	private Conference conference;
-	
+
 	@ManyToOne
 	private PaperType type;
-	
+
 	@NotEmpty
 	private String title;
-	
+
 	@NotEmpty
 	private String keywords;
-	
+
+	@JsonIgnore
+	private Blob paperFile;
+
+	private String url;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public PaperType getType() {
 		return type;
 	}
@@ -63,9 +77,6 @@ public class Paper extends BaseEntity {
 		this.paperFile = paperFile;
 	}
 
-	@JsonIgnore
-	private Blob paperFile;
-
 	public String getPaperAbstract() {
 		return paperAbstract;
 	}
@@ -80,6 +91,11 @@ public class Paper extends BaseEntity {
 
 	public void setConference(Conference conference) {
 		this.conference = conference;
+	}
+	
+	@JsonIgnore
+	public String getTitleSlug(){
+		return SlugGenerator.toSlug(title);
 	}
 
 }

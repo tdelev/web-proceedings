@@ -6,7 +6,7 @@
   <div class="col-md-6">
   <form role="form" name="paperTypeForm" ng-submit="savePaperType()" novalidate>
   <div class="form-group" >
-    <label for="name">Paper type</label>
+    <label for="name">Name</label>
     <input type="text" class="form-control" id="name" placeholder="Enter paper type" ng-model="paperType.name" required>
   </div>
    <button type="submit" class="btn btn-primary" ng-disabled="!paperTypeForm.$valid">Submit</button>
@@ -15,7 +15,7 @@
   <div class="col-md-6" >
   <table class="table table-condensed table-striped table-bordered" ng-show="types.length">
   <tr>
-  <th>Id</th><th>Paper type</th><th>Edit</th><th>Delete</th>
+  <th>Id</th><th>Name</th><th>Edit</th><th>Delete</th>
   </tr>
   <tr ng-repeat="paperType in types">
 	  <td>{{paperType.id}}</td>

@@ -35,11 +35,11 @@ public class PaperResource {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	public Paper get(@PathVariable Long id, HttpServletResponse response) {
-		Paper departmentGroup = service.findById(id);
-		if (departmentGroup == null) {
+		Paper paper = service.findById(id);
+		if (paper == null) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
-		return departmentGroup;
+		return paper;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
