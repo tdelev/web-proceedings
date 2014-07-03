@@ -42,13 +42,14 @@
 <div class="col-md-6">
   <table class="table table-condensed table-striped table-bordered" ng-show="papers.length">
   <tr>
-  <th>Title</th><th>Conference</th><th>Edit</th><th>Delete</th>
+  <th>Title</th><th>Conference</th><th>Edit</th><th>Delete</th><th>Authors</th>
   </tr>
   <tr ng-repeat="paper in papers">
 	  <td>{{paper.title}}</td>
 	  <td>{{paper.conference.title}}</td>
 	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getPaper(paper.id)">Edit</button></td>
 	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deletePaper(paper.id)">Delete</button></td>
+	  <td><a ng-href="#/paper/{{paper.id}}/authors">Authors</a></td>
   </tr>
   </table>
   </div>

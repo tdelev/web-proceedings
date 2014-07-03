@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1>PaperAuthors</h1>
+</div>
+<h2>{{paper.title}}</h2>
+<div class="row">
+  <div class="col-md-6">
+  <form role="form" name="paperAuthorForm" ng-submit="savePaperAuthor()" novalidate>
+  <div class="form-group">
+    <label for="author">Author</label>
+ <select class="form-control" ui-select2 data-placeholder="Select author" ng-model="paperAuthor.author.id">
+  <option value=""></option>
+  <option ng-repeat="a in authors" value="{{a.id}}">{{a.firstName}} {{a.lastName}}</option>
+</select>
+  </div>
+   <button type="submit" class="btn btn-primary" ng-disabled="!paperAuthorForm.$valid">Submit</button>
+</form>
+  </div>
+  <div class="col-md-6" >
+  <table class="table table-condensed table-striped table-bordered" ng-show="paperAuthors.length">
+  <tr>
+  <th>Id</th><th>Name</th><th>Edit</th><th>Delete</th>
+  </tr>
+  <tr ng-repeat="p in paperAuthors">
+	  <td>{{p.id}}</td>
+	  <td>{{p.author.firstName}} {{p.author.lastName}}</td>
+	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getPaperAuthor(p.id)">Edit</button></td>
+	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deletePaperAuthor(p.id)">Delete</button></td>
+  </tr>
+  </table>
+  </div>
+</div>

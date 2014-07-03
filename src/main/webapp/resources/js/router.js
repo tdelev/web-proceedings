@@ -16,11 +16,14 @@ WP.config([ '$routeProvider', '$locationProvider',
 				templateUrl : 'views/admin/conferences.html',
 				controller : 'ConferencesController'
 			}).when('/papers', {
-				templateUrl: 'views/admin/papers.html',
-				controller: 'PaperController'
+				templateUrl : 'views/admin/papers.html',
+				controller : 'PaperController'
 			}).when('/paperTypes', {
-				templateUrl: 'views/admin/paperType.html',
+				templateUrl : 'views/admin/paperType.html',
 				controller : 'PaperTypeController'
+			}).when('/paper/:paper_id/authors', {
+				templateUrl: 'views/admin/paperAuthors.html',
+				controller: 'PaperAuthorsController'
 			}).otherwise({
 				redirectTo : '/'
 			});

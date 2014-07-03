@@ -112,12 +112,12 @@ WP.controller('PaperTypeController', [ '$scope', 'PaperType',
 			};
 
 		} ]);
-WP.controller('PaperController', [ '$scope', 'Paper','Conference','PaperType',
-		function($scope, Paper,Conference,PaperType) {
+WP.controller('PaperController', [ '$scope', 'Paper', 'Conference',
+		'PaperType', function($scope, Paper, Conference, PaperType) {
 			$scope.paper = {};
 			$scope.papers = Paper.query();
-			$scope.conferences=Conference.query();
-			$scope.types=PaperType.query();
+			$scope.conferences = Conference.query();
+			$scope.types = PaperType.query();
 			$scope.savePaper = function() {
 				Paper.save($scope.paper, function(paper) {
 					$scope.papers = Paper.query();
@@ -137,6 +137,46 @@ WP.controller('PaperController', [ '$scope', 'Paper','Conference','PaperType',
 				}, function() {
 					$scope.papers = Paper.query();
 					$scope.paper = {};
+				});
+
+			};
+
+		} ]);
+WP.controller('PaperAuthorsController', [ '$scope', '$routeParams',
+		'PaperAuthor', 'Paper','Author',
+		function($scope, $routeParams, PaperAuthor, Paper, Author) {
+			$scope.paperAuthor = {};
+			$scope.paperAuthors = PaperAuthor.getByPaperId({
+				id : $routeParams.paper_id
+			});
+			$scope.paper = Paper.get({
+				id : $routeParams.paper_id
+			});
+			$scope.authors=Author.query();
+			$scope.savePaperAuthor = function() {
+				$scope.paperAuthor.paper = $scope.paper;
+				PaperAuthor.save($scope.paperAuthor, function(paperAuthor) {
+					$scope.paperAuthors = PaperAuthor.getByPaperId({
+						id : $routeParams.paper_id
+					});
+					$scope.paperAuthor = {};
+					$scope.paperAuthorForm.$setPristine();
+				});
+			};
+
+			$scope.getPaperAuthor = function(id) {
+				$scope.paperAuthor = PaperAuthor.get({
+					id : id
+				});
+			};
+			$scope.deletePaperAuthor = function(id) {
+				PaperAuthor.remove({
+					id : id
+				}, function() {
+					$scope.paperAuthors = PaperAuthor.getByPaperId({
+						id : $routeParams.paper_id
+					});
+					$scope.paperAuthor = {};
 				});
 
 			};
