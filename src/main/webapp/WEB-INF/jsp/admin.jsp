@@ -36,7 +36,7 @@
   <body ng-app="WP">
 
 	<!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="HeaderController">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -45,15 +45,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="${pageContext.request.contextPath}/">Web proceedings - Admin</a>
+          <a ng-class="{ active: isActive('/')}" class="navbar-brand" href="${pageContext.request.contextPath}/">Web proceedings - Admin</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="${pageContext.request.contextPath}/admin/">Home</a></li>
-              <li><a href="#/papers">Papers</a></li>
-            <li><a href="#/authors">Authors</a></li>
-             <li><a href="#/conferences">Conferences</a></li>
-            <li><a href="#/paperTypes">Paper types</a></li>
+            <li ng-class="{ active: isActive('/admin')}"><a href="${pageContext.request.contextPath}/admin">Home</a></li>
+              <li ng-class="{ active: isActive('/papers')}"><a href="#/papers">Papers</a></li>
+            <li ng-class="{ active: isActive('/authors')}"><a href="#/authors">Authors</a></li>
+             <li ng-class="{ active: isActive('/conferences')}"><a href="#/conferences">Conferences</a></li>
+            <li ng-class="{ active: isActive('/paperTypes')}"><a href="#/paperTypes">Paper types</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#/login">Login</a></li>

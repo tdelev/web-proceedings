@@ -1,0 +1,26 @@
+<div class="page-header">
+	<h1>Import Authors</h1>
+</div>
+
+
+<div class="row">
+	<div class="col-md-6 upload-input">
+			<input type="file" ng-file-select="onFileSelect($files)" >
+	</div>
+	
+	<div class="col-md-12">
+		  <table class="table table-condensed table-striped table-bordered" ng-show="authors.length">
+			  <tr>
+			  <th>Id</th><th>First name</th><th>Last name</th><th>Email</th><th>Country</th><th>Affiliation</th>
+			  </tr>
+			  <tr ng-repeat="author in authors">
+				  <td>{{author.id}}</td>
+				  <td>{{author.firstName}}</td>
+				  <td>{{author.lastName}}</td>
+				  <td>{{author.email}}</td>
+				  <td>{{author.country}}</td>
+				  <td>{{author.affiliation}}</td>
+			  </tr>
+		  </table>
+	</div>
+</div>

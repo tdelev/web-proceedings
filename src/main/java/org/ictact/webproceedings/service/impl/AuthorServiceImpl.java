@@ -19,5 +19,10 @@ public class AuthorServiceImpl extends
 		return repository;
 	}
 
+	@Override
+	public Author findByFirstNameAndLastName(String firstName, String lastName) {
+		return repository.findByFirstNameAndLastName(firstName, lastName);
+	}
+
 
 }

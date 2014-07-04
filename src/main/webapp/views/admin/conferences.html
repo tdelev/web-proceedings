@@ -2,45 +2,62 @@
   <h1>Conferences</h1>
 </div>
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-4">
  <form role="form" name="conferenceForm" ng-submit="saveConference()" novalidate>
   <div class="form-group" >
-    <label for="title">Title</label>
+    <label for="title">Title: *</label>
     <input type="text" class="form-control" id="title" placeholder="Enter title" ng-model="conference.title" required>
   </div>
   <div class="form-group">
-    <label for="topic">Topic</label>
+    <label for="topic">Topic: *</label>
     <input type="text" class="form-control" id="topic" placeholder="Enter topic" ng-model="conference.topic" required>
+  </div>
+  <div class="form-group">
+    <label for="editors">Editors: *</label>
+    <input type="text" class="form-control" id="editors" placeholder="Enter editors" ng-model="conference.editors" required>
   </div>
   <div class="row ">
   <div class="form-group col-md-6">
-   <label for="dateFrom">Date from</label>
+   <label for="dateFrom">Date from: *</label>
  <input type="date" class="form-control" id="dateFrom" placeholder="Enter date" ng-model="conference.dateFrom" required>
  </div>
  <div class="form-group col-md-6">
-   <label for="dateTo">Date to</label>
+   <label for="dateTo">Date to: *</label>
  <input type="date" class="form-control" id="dateTo" placeholder="Enter date" ng-model="conference.dateTo" required>
  </div>
   </div>
   <div class="form-group">
-    <label for="venue">Venue</label>
+    <label for="series">Springer series: *</label>
+    <input type="text" class="form-control" id="series" placeholder="Enter Springer series" ng-model="conference.series" required>
+  </div>
+  <div class="form-group">
+    <label for="issn">ISSN</label>
+    <input type="text" class="form-control" id="issn" placeholder="Enter ISSN" ng-model="conference.issn">
+  </div>
+  <div class="form-group">
+    <label for="url">Springer URL</label>
+    <input type="text" class="form-control" id="url" placeholder="Enter Springer URL" ng-model="conference.url">
+  </div>
+  <div class="form-group">
+    <label for="venue">Venue: *</label>
     <input type="text" class="form-control" id="venue" placeholder="Enter venue" ng-model="conference.venue" required>
   </div>
  
-  <button type="submit" class="btn btn-primary" ng-disabled="!conferenceForm.$valid" >Submit</button>
+  <button type="submit" class="btn btn-primary" ng-disabled="!conferenceForm.$valid" >Save</button>
 </form>
 
 </div>
-<div class="col-md-6">
+<div class="col-md-8">
   <table class="table table-condensed table-striped table-bordered" ng-show="conferences.length">
   <tr>
-  <th>Title</th><th>Topic</th><th>Date</th><th>Venue</th><th>Edit</th><th>Delete</th>
+  <th>Title</th><th>Topic</th><th>Date</th><th>Venue</th><th>ISSN</th><th>Edit</th><th>Delete</th>
   </tr>
   <tr ng-repeat="conference in conferences">
 	  <td>{{conference.title}}</td>
 	  <td>{{conference.topic}}</td>
 	  <td>{{conference.dateFrom | date : 'd'}} - {{conference.dateTo | date : 'd MMM yyyy'}}</td>
 	  <td>{{conference.venue}}</td>
+	  <td>{{conference.issn}}</td>
 	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getConference(conference.id)">Edit</button></td>
 	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteConference(conference.id)">Delete</button></td>
   </tr>

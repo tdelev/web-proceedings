@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- all resources inside folder src/main/webapp/resources are mapped so 
-		they can be refered to inside JSP files (see header.jsp for more details) -->
+		they can be refered to inside JSP files (see head.jsp for more details) -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	<import resource="mvc-view-config.xml" />

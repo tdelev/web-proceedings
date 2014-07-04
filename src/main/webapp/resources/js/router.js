@@ -5,14 +5,16 @@ WP.config([ '$routeProvider', '$locationProvider',
 			$routeProvider.when('/', {
 				templateUrl : 'views/index.html'
 			}).when('/login', {
-				templateUrl : 'views/login.html',
-				controller : LoginController
+				templateUrl : 'views/login.html'
 			}).when('/about', {
 				templateUrl : 'views/about.html'
 			}).when('/authors', {
 				templateUrl : 'views/admin/authors.html',
 				controller : 'AuthorsController'
-			}).when('/conferences', {
+			}).when('/authors/import', {
+        templateUrl : 'views/admin/authorsImport.html',
+        controller : 'AuthorsImportController'
+      }).when('/conferences', {
 				templateUrl : 'views/admin/conferences.html',
 				controller : 'ConferencesController'
 			}).when('/papers', {

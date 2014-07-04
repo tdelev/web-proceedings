@@ -18,7 +18,8 @@ public class Author extends BaseEntity {
 	@NotEmpty
 	private String email;
 
-	@NotEmpty
+	private String country;
+
 	private String affiliation;
 
 	public String getFirstName() {
@@ -35,6 +36,14 @@ public class Author extends BaseEntity {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getEmail() {

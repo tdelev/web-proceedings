@@ -8,12 +8,10 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.ictact.webproceedings.util.CustomLocalDateSerializer;
+import org.ictact.webproceedings.util.SlugGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import org.ictact.webproceedings.util.SlugGenerator;
-
 
 @Entity
 @Table(name = "conferences")
@@ -25,18 +23,50 @@ public class Conference extends BaseEntity {
 	@NotEmpty
 	private String topic;
 
+	@NotEmpty
+	private String editors;
+
+	@NotEmpty
+	private String series;
+
+	private String issn;
+
+	private String url;
 
 	@NotNull
-	@JsonSerialize(using=CustomLocalDateSerializer.class)
+	@JsonSerialize(using = CustomLocalDateSerializer.class)
 	private Date dateFrom;
 
 	@NotNull
-	@JsonSerialize(using=CustomLocalDateSerializer.class)
+	@JsonSerialize(using = CustomLocalDateSerializer.class)
 	private Date dateTo;
-
 
 	@NotEmpty
 	private String venue;
+
+	public String getIssn() {
+		return issn;
+	}
+
+	public String getSeries() {
+		return series;
+	}
+
+	public void setSeries(String series) {
+		this.series = series;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public void setIssn(String issn) {
+		this.issn = issn;
+	}
 
 	public String getTitle() {
 		return title;
@@ -78,6 +108,13 @@ public class Conference extends BaseEntity {
 		this.venue = venue;
 	}
 
+	public String getEditors() {
+		return editors;
+	}
+
+	public void setEditors(String editors) {
+		this.editors = editors;
+	}
 
 	@JsonIgnore
 	public String getTitleSlug() {
