@@ -32,6 +32,10 @@
     <label for="keywords">Keywords</label>
     <input type="text" class="form-control" id="keywords" placeholder="Enter keywords" ng-model="paper.keywords" >
   </div>
+   <div class="form-group">
+    <label for="citation">Citation</label>
+    <input type="text" class="form-control" id="citation" placeholder="Enter citation " ng-model="paper.citation" >
+  </div>
   <div class="form-group">
     <label for="url">Springer URL</label>
     <input type="text" class="form-control" id="url" placeholder="Enter Springer URL" ng-model="paper.url" >
@@ -44,13 +48,10 @@
 </form>
 </div>
 <div class="col-md-6">
-  <table class="table table-condensed table-striped table-bordered" ng-show="papers.length">
-  <tr>
-  <th>Title</th><th>Conference</th><th>Edit</th><th>Delete</th><th>Authors</th>
-  </tr>
-  <tr ng-repeat="paper in papers">
-	  <td>{{paper.title}}</td>
-	  <td>{{paper.conference.title}}</td>
+  <table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered" ng-show="papers.length">
+  <tr ng-repeat="paper in $data">
+	  <td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">{{paper.title}}</td>
+	  <td data-title="'Conference'" sortable="'conference.title'" filter="{ 'conference.title': 'text' }">{{paper.conference.title}}</td>
 	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getPaper(paper.id)">Edit</button></td>
 	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deletePaper(paper.id)">Delete</button></td>
 	  <td><a ng-href="#/paper/{{paper.id}}/authors">Authors</a></td>

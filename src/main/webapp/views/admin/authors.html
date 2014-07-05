@@ -34,10 +34,10 @@
   <div class="col-md-8" >
   <table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered" ng-show="authors.length">
   <tr ng-repeat="author in $data">
-	  <td data-title="'ID'" sortable="true">{{author.id}}</td>
-	  <td data-title="'First Name'" sortable="true" filter="{ 'firstName': 'text' }">{{author.firstName}}</td>
-	  <td data-title="'Last Name'" sortable="true" filter="{ 'lastName': 'text' }">{{author.lastName}}</td>
-	  <td data-title="'Email'" sortable="true">{{author.email}}</td>
+	  <td data-title="'ID'" sortable="'id'">{{author.id}}</td>
+	  <td data-title="'First Name'" sortable="'firstName'" filter="{ 'firstName': 'text' }">{{author.firstName}}</td>
+	  <td data-title="'Last Name'" sortable="'lastName'" filter="{ 'lastName': 'text' }">{{author.lastName}}</td>
+	  <td data-title="'Email'" sortable="'email'" filter="{ 'email': 'text' }">{{author.email}}</td>
 	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getAuthor(author.id)">Edit</button></td>
 	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteAuthor(author.id)">Delete</button></td>
   </tr>

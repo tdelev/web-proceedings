@@ -35,7 +35,18 @@ public class Paper extends BaseEntity {
 	@JsonIgnore
 	private Blob paperFile;
 
+	@NotEmpty
+	private String citation;
+
 	private String url;
+
+	public String getCitation() {
+		return citation;
+	}
+
+	public void setCitation(String citation) {
+		this.citation = citation;
+	}
 
 	public String getUrl() {
 		return url;
@@ -92,9 +103,9 @@ public class Paper extends BaseEntity {
 	public void setConference(Conference conference) {
 		this.conference = conference;
 	}
-	
+
 	@JsonIgnore
-	public String getTitleSlug(){
+	public String getTitleSlug() {
 		return SlugGenerator.toSlug(title);
 	}
 
