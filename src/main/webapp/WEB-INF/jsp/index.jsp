@@ -14,7 +14,8 @@
 	
     <div class="container">
       	 <c:forEach var="conf" items="${conferences}">
-      	 	<h2><a href="${pageContext.request.contextPath}/conference/${conf.id}/${conf.titleSlug}">${conf.title}</a></h2>
+      	 	<h2><a href="${pageContext.request.contextPath}/conference/${conf.id}/${conf.titleSlug}">${conf.title}</a>
+      	 	<small>Editors: ${conf.editors}</small></h2>
       	 </c:forEach>
 
     </div> <!-- /container -->

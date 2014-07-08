@@ -2,7 +2,7 @@
   <h1>Papers</h1>
 </div>
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-4">
 <form role="form" name="papersForm" ng-submit="savePaper()">
 <div class="row">
   <div class="form-group col-md-6">
@@ -47,7 +47,7 @@
    <button type="submit" class="btn btn-primary" ng-disabled="!papersForm.$valid">Save</button>
 </form>
 </div>
-<div class="col-md-6">
+<div class="col-md-8">
   <table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered" ng-show="papers.length">
   <tr ng-repeat="paper in $data">
 	  <td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">{{paper.title}}</td>

@@ -43,6 +43,16 @@ public class Conference extends BaseEntity {
 
 	@NotEmpty
 	private String venue;
+	
+	private String isbn;
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
 
 	public String getIssn() {
 		return issn;

@@ -46,8 +46,10 @@ WP.controller('AuthorsController', [
 			});
 			$scope.saveAuthor = function() {
 				Author.save($scope.author, function(author) {
-					$scope.authors = Author.query();
-					$scope.table.reload();
+					Author.query(function(data) {
+						$scope.authors = data;
+						$scope.table.reload();
+					});
 					$scope.author = {};
 					$scope.authorForm.$setPristine();
 				});
@@ -62,8 +64,10 @@ WP.controller('AuthorsController', [
 				Author.remove({
 					id : id
 				}, function() {
-					$scope.authors = Author.query();
-					$scope.table.reload();
+					Author.query(function(data) {
+						$scope.authors = data;
+						$scope.table.reload();
+					});
 					$scope.author = {};
 				});
 			};
@@ -133,8 +137,7 @@ WP.controller('PaperController', [
 		'Conference',
 		'PaperType',
 		'ngTableParams',
-		function($scope, $filterPaper, ngTableParams, Conference, PaperType,
-				Paper) {
+		function($scope, $filter, Paper, Conference, PaperType, ngTableParams) {
 			$scope.paper = {};
 			$scope.conferences = Conference.query();
 			$scope.types = PaperType.query();
@@ -165,8 +168,10 @@ WP.controller('PaperController', [
 			});
 			$scope.savePaper = function() {
 				Paper.save($scope.paper, function(paper) {
-					$scope.papers = Paper.query();
-					$scope.table.reload();
+					Paper.query(function(data) {
+						$scope.papers = data;
+						$scope.table.reload();
+					});
 					$scope.paper = {};
 					$scope.papersForm.$setPristine();
 				});
@@ -181,8 +186,10 @@ WP.controller('PaperController', [
 				Paper.remove({
 					id : id
 				}, function() {
-					$scope.papers = Paper.query();
-					$scope.table.reload();
+					Paper.query(function(data) {
+						$scope.papers = data;
+						$scope.table.reload();
+					});
 					$scope.paper = {};
 				});
 

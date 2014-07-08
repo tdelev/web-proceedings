@@ -47,7 +47,6 @@ public class PaperAuthorResource {
 	@RequestMapping(value = "/by_paper/{id}", method = RequestMethod.GET, produces = "application/json")
 	public List<PaperAuthor> getByPaper(@PathVariable Long id, HttpServletResponse response) {
 		Collection <PaperAuthor> result = service.findByPaperId(id);
-		
 		return new ArrayList<PaperAuthor> (result);
 	}
 	

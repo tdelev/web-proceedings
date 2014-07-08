@@ -1,5 +1,8 @@
 package org.ictact.webproceedings.service.impl;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.ictact.webproceedings.model.Paper;
 import org.ictact.webproceedings.repository.PaperRepository;
 import org.ictact.webproceedings.service.PaperService;
@@ -17,5 +20,12 @@ public class PaperServiceImpl extends
 	protected PaperRepository getRepository() {
 		return repository;
 	}
+
+	@Override
+	public List<Paper> findByConferenceId(Long conferenceId) {
+		return repository.findByConferenceId(conferenceId);
+	}
+
+	
 
 }
