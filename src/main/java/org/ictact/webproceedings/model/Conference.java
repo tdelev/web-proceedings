@@ -1,5 +1,6 @@
 package org.ictact.webproceedings.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -129,6 +130,15 @@ public class Conference extends BaseEntity {
 	@JsonIgnore
 	public String getTitleSlug() {
 		return SlugGenerator.toSlug(this.title);
+	}
+	
+	@JsonIgnore
+	public String getYear(){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(dateTo);
+		String year = Integer.toString(cal.get(Calendar.YEAR));
+		return year;
+		
 	}
 
 }
