@@ -14,11 +14,11 @@
 	
     <div class="container">
    
-   				<div class="list-group">
+   				<div class="list-group jumbotron">
 				<a
 					href="${pageContext.request.contextPath}/conference/${latestConf.id}/${latestConf.titleSlug}"
 						class="list-group-item">
-					<h2 class="list-group-item-heading" style="color:blue">${latestConf.title}</h2>
+					<h1 class="list-group-item-heading">${latestConf.title}</h1>
 					<p class="list-group-item-text">Editors: ${latestConf.editors}</p>
 					<p class="list-group-item-text">Title: ${latestConf.topic}</p>
 					<p class="list-group-item-text">Venue: ${latestConf.venue}</p>

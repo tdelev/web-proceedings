@@ -8,10 +8,12 @@ import org.ictact.webproceedings.model.Author;
 import org.ictact.webproceedings.model.Conference;
 import org.ictact.webproceedings.model.Paper;
 import org.ictact.webproceedings.model.PaperAuthor;
+import org.ictact.webproceedings.model.PaperType;
 import org.ictact.webproceedings.service.AuthorService;
 import org.ictact.webproceedings.service.ConferenceService;
 import org.ictact.webproceedings.service.PaperAuthorService;
 import org.ictact.webproceedings.service.PaperService;
+import org.ictact.webproceedings.service.PaperTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +33,9 @@ public class IndexController {
 
 	@Autowired
 	private PaperService paperService;
+	
+	@Autowired
+	private PaperTypeService paperTypeService;
 
 	@Autowired
 	private AuthorService authorService;
@@ -46,7 +51,7 @@ public class IndexController {
 		Conference latestConf = conferences.get(0);
 		conferences.remove(0);
 		List<Conference> conf = conferences;
-		ModelAndView result = new ModelAndView("index", "conferences", conferences);
+		ModelAndView result = new ModelAndView("index", "conferences", conf);
 		result.addObject("latestConf", latestConf);
 		return result;
 	}
@@ -61,6 +66,10 @@ public class IndexController {
 		Conference conf = confService.findById(conferenceId);
 		List<Paper> papers = paperService.findByConferenceId(conferenceId);
 		ModelAndView result = new ModelAndView("conference");
+		for (Paper paper : papers) {
+			List <PaperAuthor> paperAuthors = paperAuthorService.findByPaperId(paper.getId());
+		}
+		//result.addObject("authors", paperAuthors);
 		result.addObject("conference", conf);
 		result.addObject("papers", papers);
 		return result;
@@ -71,7 +80,9 @@ public class IndexController {
 			@PathVariable Long paperId) {
 		Paper paper = paperService.findById(paperId);
 		ModelAndView result = new ModelAndView("paper");
+		List <PaperAuthor> paperAuthors = paperAuthorService.findByPaperId(paperId);
 		result.addObject("paper", paper);
+		result.addObject("authors", paperAuthors);
 		return result;
 	}
 

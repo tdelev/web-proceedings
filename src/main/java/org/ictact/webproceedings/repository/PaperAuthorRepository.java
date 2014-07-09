@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PaperAuthorRepository extends
 		JpaRepository<PaperAuthor, Long> {
 
-	Collection<PaperAuthor> findByPaperId(Long id);
+	List<PaperAuthor> findByPaperId(Long id);
 
 	List<PaperAuthor> findByAuthorId(Long id);
 }

@@ -3,7 +3,6 @@ package org.ictact.webproceedings.service.impl;
 import java.util.Collection;
 import java.util.List;
 
-import org.ictact.webproceedings.model.Paper;
 import org.ictact.webproceedings.model.PaperAuthor;
 import org.ictact.webproceedings.repository.PaperAuthorRepository;
 import org.ictact.webproceedings.service.PaperAuthorService;
@@ -24,7 +23,7 @@ public class PaperAuthorServiceImpl extends
 	}
 
 	@Override
-	public Collection<PaperAuthor> findByPaperId(Long id) {
+	public List<PaperAuthor> findByPaperId(Long id) {
 		return repository.findByPaperId(id);
 	}
 
@@ -32,4 +31,5 @@ public class PaperAuthorServiceImpl extends
 	public List<PaperAuthor> findByAuthorId(Long id) {
 		return repository.findByAuthorId(id);
 	}
+
 }
