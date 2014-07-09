@@ -1,6 +1,7 @@
 package org.ictact.webproceedings.web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.ictact.webproceedings.model.Author;
@@ -41,7 +42,13 @@ public class IndexController {
 	public ModelAndView home() {
 		List<Conference> conferences = new ArrayList<Conference>(
 				confService.findAll());
-		return new ModelAndView("index", "conferences", conferences);
+		Collections.sort(conferences);
+		Conference latestConf = conferences.get(0);
+		conferences.remove(0);
+		List<Conference> conf = conferences;
+		ModelAndView result = new ModelAndView("index", "conferences", conferences);
+		result.addObject("latestConf", latestConf);
+		return result;
 	}
 	
 	@RequestMapping(value = "/conferences", method = RequestMethod.GET)

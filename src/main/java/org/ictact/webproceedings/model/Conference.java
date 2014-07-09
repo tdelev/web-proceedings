@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "conferences")
-public class Conference extends BaseEntity {
+public class Conference extends BaseEntity implements Comparable<Conference> {
 
 	@NotEmpty
 	private String title;
@@ -139,6 +139,11 @@ public class Conference extends BaseEntity {
 		String year = Integer.toString(cal.get(Calendar.YEAR));
 		return year;
 		
+	}
+
+	@Override
+	public int compareTo(Conference conf) {
+		return conf.dateTo.compareTo(this.dateTo);
 	}
 
 }
