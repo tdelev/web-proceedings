@@ -25,6 +25,9 @@
 					<h4 class="list-group-item-heading">${paper.title}</h4>
 					<p class="list-group-item-text">${paper.citation}</p>
 				</a>
+				<c:forEach var="pa" items="${paper.paperAuthors}">
+					<h4>${pa.author.email}</h4>
+				</c:forEach>
 			</div>
 
 		</c:forEach>

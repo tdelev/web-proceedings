@@ -1,11 +1,13 @@
 package org.ictact.webproceedings.model;
 
-import java.io.File;
 import java.sql.Blob;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -25,6 +27,17 @@ public class Paper extends BaseEntity {
 
 	@ManyToOne
 	private PaperType type;
+
+	@OneToMany(mappedBy = "paper", fetch = FetchType.EAGER)
+	private List<PaperAuthor> paperAuthors;
+
+	public List<PaperAuthor> getPaperAuthors() {
+		return paperAuthors;
+	}
+
+	public void setPaperAuthors(List<PaperAuthor> paperAuthors) {
+		this.paperAuthors = paperAuthors;
+	}
 
 	@NotEmpty
 	private String title;
