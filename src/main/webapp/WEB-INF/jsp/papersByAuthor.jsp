@@ -13,13 +13,12 @@
 </div>
 	<jsp:include page="fragments/menu.jsp" />
 	
-	
 		<c:forEach var="paper" items="${papers}">
 	<div class="list-group">
-  <a href="#" class="list-group-item ">
-    <h4 class="list-group-item-heading">${paper.title}</h4>
+	<li class="list-group-item">
+    <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/${paper.conference.titleSlug}/paper/${paper.id}/${paper.titleSlug}">${paper.title}</a></h4>
     <p class="list-group-item-text">${paper.citation}</p>
-  </a>
+  </li>
 </div>
       	 </c:forEach>
 

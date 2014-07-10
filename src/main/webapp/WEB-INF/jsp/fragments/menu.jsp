@@ -13,7 +13,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="${pageContext.request.contextPath}/conferences">Conferences</a></li> 
-            <li class="active"><a href="${pageContext.request.contextPath}/authors">Authors</a></li>             
+            <!--  li class="active"><a href="${pageContext.request.contextPath}/authors">Authors</a></li> -->            
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>            

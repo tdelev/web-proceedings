@@ -8,7 +8,6 @@ import org.ictact.webproceedings.model.Author;
 import org.ictact.webproceedings.model.Conference;
 import org.ictact.webproceedings.model.Paper;
 import org.ictact.webproceedings.model.PaperAuthor;
-import org.ictact.webproceedings.model.PaperType;
 import org.ictact.webproceedings.service.AuthorService;
 import org.ictact.webproceedings.service.ConferenceService;
 import org.ictact.webproceedings.service.PaperAuthorService;
@@ -66,10 +65,6 @@ public class IndexController {
 		Conference conf = confService.findById(conferenceId);
 		List<Paper> papers = paperService.findByConferenceId(conferenceId);
 		ModelAndView result = new ModelAndView("conference");
-		for (Paper paper : papers) {
-			List <PaperAuthor> paperAuthors = paperAuthorService.findByPaperId(paper.getId());
-		}
-		//result.addObject("authors", paperAuthors);
 		result.addObject("conference", conf);
 		result.addObject("papers", papers);
 		return result;

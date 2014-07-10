@@ -19,15 +19,15 @@
 		<h3>Papers</h3>
 		<c:forEach var="paper" items="${papers}">
 			<div class="list-group">
-				<a
-					href="${pageContext.request.contextPath}/${paper.conference.titleSlug}/paper/${paper.id}/${paper.titleSlug}"
-					class="list-group-item">
+			<li class="list-group-item">
+				<a href="${pageContext.request.contextPath}/${paper.conference.titleSlug}/paper/${paper.id}/${paper.titleSlug}">
 					<h4 class="list-group-item-heading">${paper.title}</h4>
-					<p class="list-group-item-text">${paper.citation}</p>
 				</a>
 				<c:forEach var="pa" items="${paper.paperAuthors}">
-					<h4>${pa.author.email}</h4>
+				<h4 class="list-group-item-text">${pa.author.firstName} ${pa.author.lastName}</h4>
 				</c:forEach>
+				</li>
+				
 			</div>
 
 		</c:forEach>
