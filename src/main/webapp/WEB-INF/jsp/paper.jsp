@@ -9,7 +9,7 @@
 <body>
 
 	<jsp:include page="fragments/menu.jsp" />
-
+ 
 	<div class="container">
 		<ol class="breadcrumb">
 			<li><a href="${pageContext.request.contextPath}/">Conferences</a></li>
@@ -19,7 +19,7 @@
 		</ol>
 			<div class="col-sm-8 blog-main">
 				<div class="blog-post">
-					<h2 class="blog-post-title">${paper.type.name}</h2>
+					<h2 class="blog-post-title">${paper.title}</h2>
 					<p class="blog-post-meta">${paper.type.name}</p>
 					<h2>Authors</h2>
 					<c:forEach var="author" items="${authors}">
@@ -36,7 +36,7 @@
 					<h2>Keywords</h2>
 					<p>${paper.keywords}</p>
 					<h2>URL</h2>
-					<p>${paper.url}</p>
+					<p><a href="#">${paper.url}</a></p>
 				</div>
 			</div>
 		</div>
