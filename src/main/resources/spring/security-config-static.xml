@@ -7,31 +7,23 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<!-- <security:global-method-security secured-annotations="enabled" />
-	
-	
-	<security:authentication-manager id="authenticationManager">
+	<security:global-method-security secured-annotations="enabled" />
+
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/admin/**/*"
+			access="ROLE_ADMIN" />
+		<security:form-login login-page="/login" default-target-url="/admin/" always-use-default-target="true" />
+	</security:http>
+
+
+	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
-				<security:user authorities="ROLE_USERS" name="snt" password="snt" />
+				<security:user authorities="ROLE_ADMIN" name="ictact"
+					password="ictact@F1nk!" />
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
-	<security:http realm="WP Protected API" 
-	    use-expressions="true"
-		auto-config="false" 
-		create-session="stateless" 
-		entry-point-ref="unauthorizedEntryPoint"
-		authentication-manager-ref="authenticationManager">
-		
-		<security:custom-filter ref="authTokenFilter" position="FORM_LOGIN_FILTER" />
-		<security:intercept-url pattern="/data/rest/user/authenticate" access="permitAll" />
-		<security:intercept-url pattern="/data/rest/*" access="hasRole('ROLE_USERS')" />
-		<security:intercept-url pattern="*" access="permitAll" />
-	</security:http>
-	
-	<bean id="unauthorizedEntryPoint" class="org.ictact.webproceedings.security.UnauthorizedEntryPoint" />
 
-	<bean id="authTokenFilter" class="org.ictact.webproceedings.security.AuthenticationTokenProcessingFilter" /> -->
+
 </beans>

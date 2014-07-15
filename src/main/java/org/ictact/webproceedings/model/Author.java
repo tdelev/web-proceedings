@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.ictact.webproceedings.util.SlugGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "authors")
@@ -60,6 +63,11 @@ public class Author extends BaseEntity {
 
 	public void setAffiliation(String affiliation) {
 		this.affiliation = affiliation;
+	}
+	
+	@JsonIgnore
+	public String getSlug() {
+		return SlugGenerator.toSlug(String.format("%s-%s", firstName, lastName));
 	}
 
 }

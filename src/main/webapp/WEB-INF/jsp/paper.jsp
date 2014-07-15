@@ -17,26 +17,54 @@
 				href="${pageContext.request.contextPath}/conference/${paper.conference.id}/${paper.conference.titleSlug}">${paper.conference.title}</a></li>
 			<li class="active">${paper.title}</li>
 		</ol>
-			<div class="col-sm-8 blog-main">
-				<div class="blog-post">
-					<h2 class="blog-post-title">${paper.title}</h2>
-					<p class="blog-post-meta">${paper.type.name}</p>
-					<h2>Authors</h2>
-					<c:forEach var="author" items="${authors}">
-						<p>
-							<a
-								href="${pageContext.request.contextPath}/author/${author.author.id}/${author.author.firstName}-${author.author.lastName}">${author.author.firstName}
-								${author.author.lastName}</a>
-						</p>
-					</c:forEach>
-					<h2>Citation</h2>
-					<p>${paper.citation}</p>
-					<h2>Abstract</h2>
-					<blockquote>${paper.paperAbstract}</blockquote>
-					<h2>Keywords</h2>
-					<p>${paper.keywords}</p>
-					<h2>URL</h2>
-					<p><a href="#">${paper.url}</a></p>
+				<div class="page-header">
+  					<h1>${paper.title}</h1>
+				</div>
+			<div class="blog-main">
+				<div class="row">
+					<div class="paper col-md-8">
+						<p class="paper-meta">${paper.type.name}</p>
+						<h3>Authors</h3>
+						<c:forEach var="pa" items="${authors}" varStatus="loop">
+						<span class="span-author">
+							<a href="${pageContext.request.contextPath}/author/${pa.author.id}/${pa.author.slug}">${pa.author.firstName}
+										${pa.author.lastName}</a>
+						</span>
+							<c:choose>
+								<c:when test="${paper.authorsSize == 2}">
+									<c:if test="${loop.first}"><span> and </span></c:if>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${loop.count < paper.authorsSize - 1}"><span class="span-coma">, </span></c:when>
+										<c:otherwise>
+											<c:if test="${paper.authorsSize != 1 && loop.count == paper.authorsSize - 1}"> and </c:if>
+										</c:otherwise>	
+									</c:choose>		
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<h3>Abstract</h3>
+						<blockquote>${paper.paperAbstract}</blockquote>
+						<h3>Keywords</h3>
+						<p>${paper.keywords}</p>
+						<h3>URL</h3>
+						<p><a href="${paper.url}">${paper.url}</a></p>
+					</div>
+					<div class="col-md-3 col-md-offset-1">
+						<div class="sidebar-module sidebar-module-inset">
+							<h4>Citation</h4>
+							<p>${paper.citation}</p>
+						</div>
+						<div class="sidebar-module">
+							<h4>Conferences</h4>
+							<ul class="list-unstyled">
+								<c:forEach var="conf" items="${conferences}">
+									<li><a href="${pageContext.request.contextPath}/conference/${conf.id}/${conf.titleSlug}">${conf.title}</a></li>
+								</c:forEach>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

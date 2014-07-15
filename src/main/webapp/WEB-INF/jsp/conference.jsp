@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="en">
 <jsp:include page="fragments/head.jsp" />
@@ -15,21 +16,31 @@
 		<li><a href="${pageContext.request.contextPath}/">Conferences</a></li>
 		<li  class="active">${conference.title}</li>
 	</ol>
-		<h2>${conference.title}</h2>
-		<h3>Papers</h3>
-		<c:forEach var="paper" items="${papers}">
-			<div class="list-group">
-			<li class="list-group-item">
-				<a href="${pageContext.request.contextPath}/${paper.conference.titleSlug}/paper/${paper.id}/${paper.titleSlug}">
-					<h4 class="list-group-item-heading">${paper.title}</h4>
-				</a>
-				<c:forEach var="pa" items="${paper.paperAuthors}">
-				<h4 class="list-group-item-text">${pa.author.firstName} ${pa.author.lastName}</h4>
-				</c:forEach>
-				</li>
-				
+	<div class="page-header">
+  		<h1>${conference.title} <small>Web proceedings ${conference.issn}</small></h1>
+	</div>
+	<div class="conference-info">
+		<div class="row">
+			<div class="col-md-6">
+				<label>Editors</label>
+				<p class="paper-meta">${conference.editors}</p>
 			</div>
-
+			<div class="col-md-6">
+				<label>Topic</label>
+				<p class="paper-meta">${conference.topic}</p>
+			</div>
+		</div>
+	</div>
+		<ul class="nav nav-pills">
+			<c:forEach var="type" items="${types}">
+  				<li><a href="#${type.id}">${type.name}</a></li>
+  			</c:forEach>
+		</ul>
+		<c:forEach var="type" items="${types}">
+			<h3 class="paper-type" id="${type.id}">${type.name}</h3>
+			<c:forEach var="paper" items="${papersMap[type.id]}">
+				<%@include file="fragments/paper_item.jsp" %>
+			</c:forEach>
 		</c:forEach>
 
 	</div>

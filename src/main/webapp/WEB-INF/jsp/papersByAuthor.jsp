@@ -7,20 +7,21 @@
 <jsp:include page="fragments/head.jsp" />
 
 <body>
+<jsp:include page="fragments/menu.jsp" />
+
 <div class="container">
-	<div class="page-header">
-  <h2>Papers by: ${author.firstName} ${author.lastName}</h2>
-</div>
-	<jsp:include page="fragments/menu.jsp" />
+	<ol class="breadcrumb">
+		<li><a href="${pageContext.request.contextPath}/">Conferences</a></li>
+		<li  class="active">${author.slug}</li>
+	</ol>
+
+		<div class="page-header">
+	  		<h1>${author.firstName} ${author.lastName} <small>Papers</small></h1>
+		</div>
 	
 		<c:forEach var="paper" items="${papers}">
-	<div class="list-group">
-	<li class="list-group-item">
-    <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/${paper.conference.titleSlug}/paper/${paper.id}/${paper.titleSlug}">${paper.title}</a></h4>
-    <p class="list-group-item-text">${paper.citation}</p>
-  </li>
-</div>
-      	 </c:forEach>
+			<%@include file="fragments/paper_item.jsp" %>
+      	</c:forEach>
 
     </div> <!-- /container -->
 

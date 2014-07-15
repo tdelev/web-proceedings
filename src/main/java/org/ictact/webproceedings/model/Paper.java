@@ -28,6 +28,7 @@ public class Paper extends BaseEntity {
 	@ManyToOne
 	private PaperType type;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "paper", fetch = FetchType.EAGER)
 	private List<PaperAuthor> paperAuthors;
 
@@ -48,17 +49,37 @@ public class Paper extends BaseEntity {
 	@JsonIgnore
 	private Blob paperFile;
 
+	private String fileContentType;
+
+	private String paperFileName;
+
 	@NotEmpty
-	private String citation;
+	private String pages;
 
 	private String url;
 
-	public String getCitation() {
-		return citation;
+	public String getFileContentType() {
+		return fileContentType;
 	}
 
-	public void setCitation(String citation) {
-		this.citation = citation;
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
+	}
+
+	public String getPaperFileName() {
+		return paperFileName;
+	}
+
+	public void setPaperFileName(String paperFileName) {
+		this.paperFileName = paperFileName;
+	}
+
+	public String getPages() {
+		return pages;
+	}
+
+	public void setPages(String pages) {
+		this.pages = pages;
 	}
 
 	public String getUrl() {
@@ -120,6 +141,11 @@ public class Paper extends BaseEntity {
 	@JsonIgnore
 	public String getTitleSlug() {
 		return SlugGenerator.toSlug(title);
+	}
+
+	@JsonIgnore
+	public int getAuthorsSize() {
+		return paperAuthors.size();
 	}
 
 }

@@ -14,24 +14,38 @@
 	
     <div class="container">
    
-   				<div class="list-group jumbotron">
-   				<li class="list-group-item">
+   			<div class="list-group jumbotron">
+   				<div class="list-group-item">
 				<h1 class="list-group-item-heading">
-				<a href="${pageContext.request.contextPath}/conference/${latestConf.id}/${latestConf.titleSlug}">${latestConf.title}</a></h1>
-					<p class="list-group-item-text">Editors: ${latestConf.editors}</p>
-					<p class="list-group-item-text">Title: ${latestConf.topic}</p>
-					<p class="list-group-item-text">Venue: ${latestConf.venue}</p>
-				</li>
+					<a href="${pageContext.request.contextPath}/conference/${latestConf.id}/${latestConf.titleSlug}">${latestConf.title}</a>
+				</h1>
+				<div class="row">
+					<div class="col-md-12">
+						<label>Editors</label>
+						<p class="list-group-item-text">${latestConf.editors}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label>Topic</label>
+						<p class="list-group-item-text">${latestConf.topic}</p>
+					</div>
+					<div class="col-md-6">
+						<label>Venue</label>
+						<p class="list-group-item-text">${latestConf.venue}</p>
+					</div>
+				</div>
+				</div>
 			</div>
-      	 		 <c:forEach var="conf" items="${conferences}">
-      	 		<div class="list-group">
-      	 		<li class="list-group-item">
+      	 <c:forEach var="conf" items="${conferences}">
+      	 	<div class="list-group">
+      	 		<div class="list-group-item">
 				<h2 class="list-group-item-heading">
 				<a href="${pageContext.request.contextPath}/conference/${conf.id}/${conf.titleSlug}">${conf.title}</a></h2>
 					<p class="list-group-item-text">Editors: ${conf.editors}</p>
 					<p class="list-group-item-text">Title: ${conf.topic}</p>
 					<p class="list-group-item-text">Venue: ${conf.venue}</p>
-				</li>
+				</div>
 			</div>
       	 </c:forEach>
 

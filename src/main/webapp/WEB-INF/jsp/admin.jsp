@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html lang="en">
   <head>
@@ -49,14 +50,15 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ng-class="{ active: isActive('/admin')}"><a href="${pageContext.request.contextPath}/admin">Home</a></li>
-              <li ng-class="{ active: isActive('/papers')}"><a href="#/papers">Papers</a></li>
+            <li ng-class="{ active: isActive('/papers')}"><a href="#/papers">Papers</a></li>
             <li ng-class="{ active: isActive('/authors')}"><a href="#/authors">Authors</a></li>
              <li ng-class="{ active: isActive('/conferences')}"><a href="#/conferences">Conferences</a></li>
             <li ng-class="{ active: isActive('/paperTypes')}"><a href="#/paperTypes">Paper types</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#/login">Login</a></li>
+          	<c:if test="${pageContext.request.userPrincipal.authenticated }">
+          		<li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Logout</a></li>
+          	</c:if>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

@@ -3,7 +3,7 @@
 </div>
 <div class="row">
 <div class="col-md-4">
-<form role="form" name="papersForm" ng-submit="savePaper()">
+<form role="form" name="papersForm" ng-submit="savePaper()" novalidate>
 <div class="row">
   <div class="form-group col-md-6">
     <label for="conference">Conference</label>
@@ -21,29 +21,30 @@
   </div>
   </div>
   <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" placeholder="Enter title" ng-model="paper.title">
+    <label for="title">Title *</label>
+    <input type="text" class="form-control" id="title" placeholder="Enter title" ng-model="paper.title" required>
   </div>
    <div class="form-group">
-    <label for="abstract">Abstract</label>
-   <textarea class="form-control" rows="4" ng-model="paper.paperAbstract"></textarea>
+    <label for="abstract">Abstract *</label>
+   <textarea class="form-control" rows="4" ng-model="paper.paperAbstract" required></textarea>
    </div>
   <div class="form-group">
-    <label for="keywords">Keywords</label>
-    <input type="text" class="form-control" id="keywords" placeholder="Enter keywords" ng-model="paper.keywords" >
+    <label for="keywords">Keywords *</label>
+    <input type="text" class="form-control" id="keywords" placeholder="Enter keywords" ng-model="paper.keywords" required>
   </div>
    <div class="form-group">
-    <label for="citation">Citation</label>
-    <input type="text" class="form-control" id="citation" placeholder="Enter citation " ng-model="paper.citation" >
+    <label for="pages">Pages (from - to)</label>
+    <input type="text" class="form-control" id="pages" placeholder="Enter pages " ng-model="paper.pages" >
   </div>
   <div class="form-group">
     <label for="url">Springer URL</label>
     <input type="text" class="form-control" id="url" placeholder="Enter Springer URL" ng-model="paper.url" >
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-show="paper.id">
+  	<a href="/web-proceedings/paper/download/{{paper.id}}">Download</a>
     <label for="file">File input</label>
-    <input type="file" id="file">
-   </div>
+    <input type="file" ng-file-select="onFileSelect($files)" >
+  </div>
    <button type="submit" class="btn btn-primary" ng-disabled="!papersForm.$valid">Save</button>
 </form>
 </div>

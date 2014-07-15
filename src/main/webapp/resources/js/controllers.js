@@ -133,11 +133,12 @@ WP.controller('PaperTypeController', [ '$scope', 'PaperType',
 WP.controller('PaperController', [
 		'$scope',
 		'$filter',
+		'$upload',
 		'Paper',
 		'Conference',
 		'PaperType',
 		'ngTableParams',
-		function($scope, $filter, Paper, Conference, PaperType, ngTableParams) {
+		function($scope, $filter, $upload, Paper, Conference, PaperType, ngTableParams) {
 			$scope.paper = {};
 			$scope.conferences = Conference.query();
 			$scope.types = PaperType.query();
@@ -192,8 +193,27 @@ WP.controller('PaperController', [
 					});
 					$scope.paper = {};
 				});
-
 			};
+			
+			$scope.onFileSelect = function($files) {
+        function onSuccess(data, status, headers, config) {
+          console.log("success");
+          $scope.paper = data;
+        }
+        function onError(data, status, headers, config) {
+          console.log("error");
+        }
+        for (var i = 0; i < $files.length; i++) {
+          var file = $files[i];
+          $scope.upload = $upload.upload({
+            url : WPUtil.ctx("/data/rest/papers/file/" + $scope.paper.id),
+            data : {
+              id: $scope.paper.id
+            },
+            file : file
+          }).success(onSuccess).error(onError);
+        }
+      };
 
 		} ]);
 WP.controller('PaperAuthorsController', [ '$scope', '$routeParams',
