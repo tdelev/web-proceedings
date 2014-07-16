@@ -54,7 +54,7 @@
 					<div class="col-md-3 col-md-offset-1">
 						<div class="sidebar-module sidebar-module-inset">
 							<h4>Citation</h4>
-							<p>${paper.citation}</p>
+							<p>To do</p>
 						</div>
 						<div class="sidebar-module">
 							<h4>Conferences</h4>

@@ -1,4 +1,4 @@
-<div class="list-group-item paper-item">	
+<div class="paper-item">	
 	<h4 class="list-group-item-heading">
 		<a href="${pageContext.request.contextPath}/${paper.conference.titleSlug}/paper/${paper.id}/${paper.titleSlug}">${paper.title}</a>
 	</h4>

@@ -169,9 +169,12 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6 {
 }
 
 .paper-item {
-	border: 0;
+	border-bottom: dotted 2px #e5e5e5;
+	padding: 10px 15px;
 }
-
+.paper-item h4 a{
+	color: #333;
+}
 .blog-post-title {
 	margin-bottom: 5px;
 	font-size: 28px;
