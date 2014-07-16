@@ -43,7 +43,7 @@
 			</div>
 
 			<div class="col-md-6">
-				<p class="alert alert-info" ></p>
+				<!-- <p class="alert alert-info" ></p> -->
 			</div>
 
 		</div>
