@@ -1,23 +1,12 @@
-<!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<!-- Navbar -->
+    <div class="navbar navbar-default" role="navigation">
       <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="${pageContext.request.contextPath}/">ICT Innovations Web Proceedings</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <%-- <li class="active"><a href="${pageContext.request.contextPath}/conferences">Conferences</a></li> --%> 
-            <!--  li class="active"><a href="${pageContext.request.contextPath}/authors">Authors</a></li> -->            
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="${pageContext.request.contextPath}/admin/">Admin</a></li>            
-          </ul>
-        </div><!--/.nav-collapse -->
+     		<div class="logo">
+     			<a href="${pageContext.request.contextPath}/">
+      				<img src="${pageContext.request.contextPath}/resources/images/ict-logo.png" alt="page logo" />
+      			</a>
+      		</div>
+      		<h1 class="site-header">Innovations</h1>
+      		<h2 class="site-promo">Conference Web Proceedings</h2>
       </div>
     </div>

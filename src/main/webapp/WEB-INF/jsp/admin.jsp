@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
    
-    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.png">
 
     <title>Web Proceedings</title>
 
@@ -26,6 +26,7 @@
     <link href="${pageContext.request.contextPath}/resources/bower_components/angular-motion/dist/angular-motion.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -46,7 +47,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a ng-class="{ active: isActive('/')}" class="navbar-brand" href="${pageContext.request.contextPath}/">Web proceedings - Admin</a>
+          <a ng-class="{ active: isActive('/')}" class="navbar-brand" href="${pageContext.request.contextPath}/">Web proceedings</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">

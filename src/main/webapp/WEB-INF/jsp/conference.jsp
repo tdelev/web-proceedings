@@ -18,24 +18,27 @@
 	</ol>
 	<div class="page-header">
   		<h1>${conference.title} <small>Web proceedings ${conference.issn}</small></h1>
-	</div>
-	<div class="conference-info">
-		<div class="row">
-			<div class="col-md-6">
-				<label>Editors</label>
-				<p class="paper-meta">${conference.editors}</p>
-			</div>
-			<div class="col-md-6">
-				<label>Topic</label>
-				<p class="paper-meta">${conference.topic}</p>
+		<div class="conference-info">
+			<div class="row">
+				<div class="col-md-6">
+					<label>Editors</label>
+					<p class="paper-meta">${conference.editors}</p>
+				</div>
+				<div class="col-md-6">
+					<label>Topic</label>
+					<p class="paper-meta">${conference.topic}</p>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="paper-types">
 		<ul class="nav nav-pills">
 			<c:forEach var="type" items="${types}">
   				<li><a href="#${type.id}">${type.name}</a></li>
   			</c:forEach>
 		</ul>
+	</div>
+	<div class="papers">
 		<c:forEach var="type" items="${types}">
 			<h3 class="paper-type" id="${type.id}">${type.name}</h3>
 			<c:forEach var="paper" items="${papersMap[type.id]}">
@@ -43,6 +46,7 @@
 			</c:forEach>
 		</c:forEach>
 
+	</div>
 	</div>
 	<!-- /container -->
 

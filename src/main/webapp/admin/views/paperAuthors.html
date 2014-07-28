@@ -1,16 +1,23 @@
 <div class="page-header">
-  <h1>PaperAuthors</h1>
+  <h1>Paper Authors</h1>
 </div>
 <h2>{{paper.title}}</h2>
 <div class="row">
   <div class="col-md-6">
   <form role="form" name="paperAuthorForm" ng-submit="savePaperAuthor()" novalidate>
-  <div class="form-group">
-    <label for="author">Author</label>
- <select class="form-control" ui-select2 data-placeholder="Select author" ng-model="paperAuthor.author.id">
-  <option value=""></option>
-  <option ng-repeat="a in authors" value="{{a.id}}">{{a.firstName}} {{a.lastName}}</option>
-</select>
+  <div class="row">
+  	<div class="col-md-10">
+	  <div class="form-group">
+	    	<label for="author">Author</label>
+			<select class="form-control" ui-select2 data-placeholder="-- Select author --" ng-model="paperAuthor.author.id">
+			  <option value=""></option>
+			  <option ng-repeat="a in authors" value="{{a.id}}">{{a.firstName}} {{a.lastName}}</option>
+			</select>
+	  </div>
+  	</div>
+  	<div class="col-md-2">
+		<button type="button" ng-click="addAuthor()" style="margin-top:25px; margin-left:-10px;" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i></button>
+  	</div>
   </div>
    <button type="submit" class="btn btn-primary" ng-disabled="!paperAuthorForm.$valid">Submit</button>
 </form>

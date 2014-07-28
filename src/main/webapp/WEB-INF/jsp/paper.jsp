@@ -48,14 +48,25 @@
 						<blockquote>${paper.paperAbstract}</blockquote>
 						<h3>Keywords</h3>
 						<p>${paper.keywords}</p>
-						<h3>URL</h3>
-						<p><a href="${paper.url}">${paper.url}</a></p>
 					</div>
 					<div class="col-md-3 col-md-offset-1">
 						<div class="sidebar-module sidebar-module-inset">
-							<h4>Citation</h4>
-							<p>To do</p>
+							<h4>Download</h4>
+							<c:if test="${paper.url != null}">
+								<p><a href="${paper.url}"><i class="fa fa-fw fa-file-pdf-o"></i> Springer</a></p>
+							</c:if>
+							<c:if test="${paper.paperFileName != null }">
+								<p><a href="${pageContext.request.contextPath}/paper/download/${paper.id}"><i class="fa fa-fw fa-file-pdf-o"></i> PDF</a></p>
+							</c:if>
 						</div>
+						<c:if test="${paper.paperFileName != null }">
+						<div class="sidebar-module sidebar-module-inset">
+							<h4>Export citation</h4>
+							<ul class="list-inline">
+								<li><a href="${pageContext.request.contextPath}/paper/citation/${paper.id}/bibtex"><i class="fa fa-fw fa-file-text"></i> BibTex</a></li>
+							</ul>
+						</div>
+						</c:if>
 						<div class="sidebar-module">
 							<h4>Conferences</h4>
 							<ul class="list-unstyled">

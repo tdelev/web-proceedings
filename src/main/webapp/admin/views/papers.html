@@ -1,62 +1,21 @@
 <div class="page-header">
   <h1>Papers</h1>
 </div>
-<div class="row">
-<div class="col-md-4">
-<form role="form" name="papersForm" ng-submit="savePaper()" novalidate>
-<div class="row">
-  <div class="form-group col-md-6">
-    <label for="conference">Conference</label>
- <select class="form-control" ng-model="paper.conference.id">
-  <option value="">-- Select conference --</option>
-  <option ng-repeat="conf in conferences" value="{{conf.id}}">{{conf.title}}</option>
-</select>
-  </div>
-   <div class="form-group col-md-6">
-    <label for="type">Paper type</label>
- <select class="form-control" ng-model="paper.type.id">
-  <option value="">-- Select paper type --</option>
-   <option ng-repeat="type in types" value="{{type.id}}">{{type.name}}</option>
-</select>
-  </div>
-  </div>
-  <div class="form-group">
-    <label for="title">Title *</label>
-    <input type="text" class="form-control" id="title" placeholder="Enter title" ng-model="paper.title" required>
-  </div>
-   <div class="form-group">
-    <label for="abstract">Abstract *</label>
-   <textarea class="form-control" rows="4" ng-model="paper.paperAbstract" required></textarea>
-   </div>
-  <div class="form-group">
-    <label for="keywords">Keywords *</label>
-    <input type="text" class="form-control" id="keywords" placeholder="Enter keywords" ng-model="paper.keywords" required>
-  </div>
-   <div class="form-group">
-    <label for="pages">Pages (from - to)</label>
-    <input type="text" class="form-control" id="pages" placeholder="Enter pages " ng-model="paper.pages" >
-  </div>
-  <div class="form-group">
-    <label for="url">Springer URL</label>
-    <input type="text" class="form-control" id="url" placeholder="Enter Springer URL" ng-model="paper.url" >
-  </div>
-  <div class="form-group" ng-show="paper.id">
-  	<a href="/web-proceedings/paper/download/{{paper.id}}">Download</a>
-    <label for="file">File input</label>
-    <input type="file" ng-file-select="onFileSelect($files)" >
-  </div>
-   <button type="submit" class="btn btn-primary" ng-disabled="!papersForm.$valid">Save</button>
-</form>
+<div class="create-btn">
+	<button class="btn btn-primary" ng-click="createNew()">
+		<i class="fa fa-fw fa-plus"></i> Add new paper
+	</button>
 </div>
-<div class="col-md-8">
-  <table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered" ng-show="papers.length">
+<table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered" ng-show="papers.length">
   <tr ng-repeat="paper in $data">
-	  <td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">{{paper.title}}</td>
-	  <td data-title="'Conference'" sortable="'conference.title'" filter="{ 'conference.title': 'text' }">{{paper.conference.title}}</td>
-	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getPaper(paper.id)">Edit</button></td>
-	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deletePaper(paper.id)">Delete</button></td>
-	  <td><a ng-href="#/paper/{{paper.id}}/authors">Authors</a></td>
+  	<td data-title="'ID'" sortable="'id'">{{paper.id}}</td>
+	<td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">{{paper.title}}</td>
+	<td data-title="'Type'" sortable="'type.name'">{{paper.type.name}}</td>
+	<td data-title="'Conference'" sortable="'conference.title'" filter="{ 'conference.title': 'text' }">{{paper.conference.title}}</td>
+	<td data-title="'Authors'"><a class="btn btn-info btn-xs" ng-href="#/paper/{{paper.id}}/authors"><i class="fa fa-fw fa-group"></i> Authors</a></td>
+	<td data-title="'Edit'">
+		<button type="button" class="btn btn-default btn-xs" ng-click="getPaper(paper.id)"><i class="fa fa-fw fa-edit"></i> Edit</button>
+		<button type="button" class="btn btn-danger btn-xs" ng-click="deletePaper(paper.id)"><i class="fa fa-fw fa-trash-o"></i> Delete</button>
+	</td>
   </tr>
-  </table>
-  </div>
-</div>
+</table>

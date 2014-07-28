@@ -5,11 +5,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.png">
 
     <title>ICT Innovations Web Proceedings</title>
 
     <!-- Bootstrap core CSS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
     
     <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap/dist/css/font-awesome.min.css" rel="stylesheet">

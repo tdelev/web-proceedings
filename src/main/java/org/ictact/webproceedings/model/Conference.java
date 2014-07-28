@@ -1,5 +1,6 @@
 package org.ictact.webproceedings.model;
 
+import java.sql.Blob;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -44,8 +45,15 @@ public class Conference extends BaseEntity implements Comparable<Conference> {
 
 	@NotEmpty
 	private String venue;
-	
+
 	private String isbn;
+
+	@JsonIgnore
+	private Blob proceedingsFile;
+
+	private String fileContentType;
+
+	private String fileName;
 
 	public String getIsbn() {
 		return isbn;
@@ -131,14 +139,37 @@ public class Conference extends BaseEntity implements Comparable<Conference> {
 	public String getTitleSlug() {
 		return SlugGenerator.toSlug(this.title);
 	}
-	
+
 	@JsonIgnore
-	public String getYear(){
+	public String getYear() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dateTo);
 		String year = Integer.toString(cal.get(Calendar.YEAR));
 		return year;
-		
+	}
+
+	public Blob getProceedingsFile() {
+		return proceedingsFile;
+	}
+
+	public void setProceedingsFile(Blob proceedingsFile) {
+		this.proceedingsFile = proceedingsFile;
+	}
+
+	public String getFileContentType() {
+		return fileContentType;
+	}
+
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	@Override

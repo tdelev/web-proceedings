@@ -41,10 +41,10 @@
       	 	<div class="list-group">
       	 		<div class="list-group-item">
 				<h2 class="list-group-item-heading">
+				<i class="fa fa-fw fa-angle-double-right"></i>
 				<a href="${pageContext.request.contextPath}/conference/${conf.id}/${conf.titleSlug}">${conf.title}</a></h2>
-					<p class="list-group-item-text">Editors: ${conf.editors}</p>
-					<p class="list-group-item-text">Title: ${conf.topic}</p>
-					<p class="list-group-item-text">Venue: ${conf.venue}</p>
+					<p class="list-group-item-text conference-item-text"><label>Editors:</label> ${conf.editors}</p>
+					<p class="list-group-item-text conference-item-text"><label>Topic:</label> ${conf.topic}</p>
 				</div>
 			</div>
       	 </c:forEach>

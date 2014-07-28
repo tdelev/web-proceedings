@@ -1,5 +1,6 @@
 package org.ictact.webproceedings.web;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
@@ -22,8 +23,11 @@ import org.ictact.webproceedings.service.ConferenceService;
 import org.ictact.webproceedings.service.PaperAuthorService;
 import org.ictact.webproceedings.service.PaperService;
 import org.ictact.webproceedings.service.PaperTypeService;
+import org.ictact.webproceedings.util.CitationManager;
+import org.ictact.webproceedings.util.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,13 +57,15 @@ public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
-		List<Conference> conferences = new ArrayList<Conference>(
-				confService.findAll());
-		Collections.sort(conferences);
+		List<Conference> conferences = confService
+				.findAllByOrderByDateFromDesc();
+		if (conferences.size() == 0) {
+			return new ModelAndView("empty");
+		}
 		Conference latestConf = conferences.get(0);
 		conferences.remove(0);
-		List<Conference> conf = conferences;
-		ModelAndView result = new ModelAndView("index", "conferences", conf);
+		ModelAndView result = new ModelAndView("index", "conferences",
+				conferences);
 		result.addObject("latestConf", latestConf);
 		return result;
 	}
@@ -138,6 +144,13 @@ public class IndexController {
 		return null;
 	}
 
+	@RequestMapping("/paper/citation/{id}/bibtex")
+	public void bibTexCitation(@PathVariable("id") Long id,
+			HttpServletResponse response) {
+		Paper paper = paperService.findById(id);
+		writeTextToResponse(CitationManager.bibtex(paper), response);
+	}
+
 	private void writeFileToResponse(Paper paper, HttpServletResponse response) {
 		try {
 			OutputStream out = response.getOutputStream();
@@ -154,5 +167,32 @@ public class IndexController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void writeTextToResponse(String text, HttpServletResponse response) {
+		try {
+			OutputStream out = response.getOutputStream();
+			response.setContentType("text/plain");
+			IOUtils.copy(new ByteArrayInputStream(text.getBytes()), out);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping("/notfound")
+	public String notfound() {
+		return "notfound";
+	}
+
+	@RequestMapping("/error")
+	public String error() {
+		return "error";
+	}
+
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public String handleResourceNotFoundException() {
+		return "notfound";
 	}
 }

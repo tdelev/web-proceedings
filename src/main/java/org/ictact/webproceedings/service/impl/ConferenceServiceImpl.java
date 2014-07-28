@@ -1,5 +1,7 @@
 package org.ictact.webproceedings.service.impl;
 
+import java.util.List;
+
 import org.ictact.webproceedings.model.Conference;
 import org.ictact.webproceedings.repository.ConferenceRepository;
 import org.ictact.webproceedings.service.ConferenceService;
@@ -17,6 +19,11 @@ public class ConferenceServiceImpl extends
 	@Override
 	protected ConferenceRepository getRepository() {
 		return repository;
+	}
+
+	@Override
+	public List<Conference> findAllByOrderByDateFromDesc() {
+		return repository.findAllByOrderByDateFromDesc();
 	}
 
 }

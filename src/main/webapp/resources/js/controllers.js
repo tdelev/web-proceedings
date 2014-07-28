@@ -134,11 +134,12 @@ WP.controller('PaperController', [
 		'$scope',
 		'$filter',
 		'$upload',
+		'$modal',
 		'Paper',
 		'Conference',
 		'PaperType',
 		'ngTableParams',
-		function($scope, $filter, $upload, Paper, Conference, PaperType, ngTableParams) {
+		function($scope, $filter, $upload, $modal, Paper, Conference, PaperType, ngTableParams) {
 			$scope.paper = {};
 			$scope.conferences = Conference.query();
 			$scope.types = PaperType.query();
@@ -167,20 +168,36 @@ WP.controller('PaperController', [
 							}
 						});
 			});
-			$scope.savePaper = function() {
+			$scope.modalCreate = $modal({
+        scope: $scope,
+        title: 'Create paper',
+        template: 'templates/modal-form.tpl.html',
+        contentTemplate: 'forms/paper.html',
+        show: false
+      });
+			
+			$scope.createNew = function() {
+			  $scope.paper = {};
+			  $scope.modalCreate.show();
+			};
+			
+			$scope.save = function() {
 				Paper.save($scope.paper, function(paper) {
 					Paper.query(function(data) {
 						$scope.papers = data;
 						$scope.table.reload();
 					});
 					$scope.paper = {};
-					$scope.papersForm.$setPristine();
+					//$scope.form.$setPristine();
+					$scope.modalCreate.hide();
 				});
 			};
 
 			$scope.getPaper = function(id) {
 				$scope.paper = Paper.get({
 					id : id
+				}, function() {
+				  $scope.modalCreate.show();
 				});
 			};
 			$scope.deletePaper = function(id) {
@@ -197,7 +214,6 @@ WP.controller('PaperController', [
 			
 			$scope.onFileSelect = function($files) {
         function onSuccess(data, status, headers, config) {
-          console.log("success");
           $scope.paper = data;
         }
         function onError(data, status, headers, config) {
@@ -216,9 +232,9 @@ WP.controller('PaperController', [
       };
 
 		} ]);
-WP.controller('PaperAuthorsController', [ '$scope', '$routeParams',
+WP.controller('PaperAuthorsController', [ '$scope', '$routeParams', '$modal',
 		'PaperAuthor', 'Paper', 'Author',
-		function($scope, $routeParams, PaperAuthor, Paper, Author) {
+		function($scope, $routeParams, $modal, PaperAuthor, Paper, Author) {
 			$scope.paperAuthor = {};
 			$scope.paperAuthors = PaperAuthor.getByPaperId({
 				id : $routeParams.paper_id
@@ -252,7 +268,26 @@ WP.controller('PaperAuthorsController', [ '$scope', '$routeParams',
 					});
 					$scope.paperAuthor = {};
 				});
-
+			};
+			
+			$scope.modalCreate = $modal({
+        scope: $scope,
+        title: 'Add new author',
+        template: 'templates/modal-form.tpl.html',
+        contentTemplate: 'forms/author.html',
+        show: false
+      });
+			
+			$scope.addAuthor = function() {
+			  $scope.author = {};
+			  $scope.modalCreate.show();
+			};
+			
+			$scope.save = function() {
+			  Author.save($scope.author, function() {
+			    $scope.authors = Author.query();
+			    $scope.modalCreate.hide();
+			  });
 			};
 
 		} ]);
