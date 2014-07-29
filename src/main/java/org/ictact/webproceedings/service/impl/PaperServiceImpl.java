@@ -1,6 +1,5 @@
 package org.ictact.webproceedings.service.impl;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.ictact.webproceedings.model.Paper;
@@ -11,7 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PaperServiceImpl extends
-		BaseEntityCrudServiceImpl<Paper, PaperRepository> implements PaperService {
+		BaseEntityCrudServiceImpl<Paper, PaperRepository> implements
+		PaperService {
 
 	@Autowired
 	private PaperRepository repository;
@@ -23,9 +23,7 @@ public class PaperServiceImpl extends
 
 	@Override
 	public List<Paper> findByConferenceId(Long conferenceId) {
-		return repository.findByConferenceId(conferenceId);
+		return repository.findByConferenceIdOrderByNumberAsc(conferenceId);
 	}
-
-	
 
 }

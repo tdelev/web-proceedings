@@ -263,6 +263,8 @@ WP.controller('PaperController', [
           }).success(onSuccess).error(onError);
         }
       };
+      
+      $scope.basePath = WPUtil.basePath;
 
     }]);
 WP.controller('PaperAuthorsController', ['$scope', '$routeParams', '$modal',

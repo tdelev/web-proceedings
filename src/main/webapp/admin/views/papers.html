@@ -9,6 +9,8 @@
 <table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered" ng-show="papers.length">
   <tr ng-repeat="paper in $data">
   	<td data-title="'ID'" sortable="'id'">{{paper.id}}</td>
+  	<td data-title="'Number'" sortable="'number'">{{paper.number}}</td>
+  	<td data-title="'File'"><span ng-show="paper.paperFileName"><a href="{{ basePath }}/paper/download/{{paper.id}}"><i class="fa fa-fw fa-file-pdf-o"></i></a></span></td>
 	<td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">{{paper.title}}</td>
 	<td data-title="'Type'" sortable="'type.name'">{{paper.type.name}}</td>
 	<td data-title="'Conference'" sortable="'conference.title'" filter="{ 'conference.title': 'text' }">{{paper.conference.title}}</td>

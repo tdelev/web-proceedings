@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "papers")
 public class Paper extends BaseEntity {
 
+	private int number;
+
 	@Column(length = 1000)
 	private String paperAbstract;
 
@@ -146,6 +148,14 @@ public class Paper extends BaseEntity {
 	@JsonIgnore
 	public int getAuthorsSize() {
 		return paperAuthors.size();
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 }

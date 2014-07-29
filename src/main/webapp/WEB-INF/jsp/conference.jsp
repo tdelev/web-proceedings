@@ -34,18 +34,21 @@
 	<div class="paper-types">
 		<ul class="nav nav-pills">
 			<c:forEach var="type" items="${types}">
-  				<li><a href="#${type.id}">${type.name}</a></li>
+				<c:if test="${not empty papersMap[type.id]}">
+  					<li><a href="#${type.id}">${type.name}</a></li>
+  				</c:if>
   			</c:forEach>
 		</ul>
 	</div>
 	<div class="papers">
 		<c:forEach var="type" items="${types}">
-			<h3 class="paper-type" id="${type.id}">${type.name}</h3>
-			<c:forEach var="paper" items="${papersMap[type.id]}">
-				<%@include file="fragments/paper_item.jsp" %>
-			</c:forEach>
+			<c:if test="${not empty papersMap[type.id]}">
+				<h3 class="paper-type" id="${type.id}">${type.name}</h3>
+				<c:forEach var="paper" items="${papersMap[type.id]}">
+					<%@include file="fragments/paper_item.jsp" %>
+				</c:forEach>
+			</c:if>
 		</c:forEach>
-
 	</div>
 	</div>
 	<!-- /container -->

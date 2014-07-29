@@ -79,8 +79,7 @@ public class IndexController {
 		Conference conf = confService.findById(conferenceId);
 		List<Paper> papers = paperService.findByConferenceId(conferenceId);
 		ModelAndView result = new ModelAndView("conference");
-		List<PaperType> types = new ArrayList<PaperType>(
-				paperTypeService.findAll());
+		List<PaperType> types = paperTypeService.findAllByWeight();
 		result.addObject("conference", conf);
 		result.addObject("papers", papers);
 		Map<Long, List<Paper>> papersMap = new HashMap<Long, List<Paper>>();

@@ -9,17 +9,26 @@
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" placeholder="Enter paper type" ng-model="paperType.name" required>
   </div>
-   <button type="submit" class="btn btn-primary" ng-disabled="!paperTypeForm.$valid">Submit</button>
+  <div class="form-group" >
+    <label for="weight">Weight</label>
+    <input type="number" class="form-control" id="weight" placeholder="Enter weight" ng-model="paperType.weight" required>
+  </div>
+   <button type="submit" class="btn btn-primary" ng-disabled="!paperTypeForm.$valid">Save</button>
 </form>
   </div>
   <div class="col-md-6" >
   <table class="table table-condensed table-striped table-bordered" ng-show="types.length">
   <tr>
-  <th>Id</th><th>Name</th><th>Edit</th><th>Delete</th>
+  	<th>Id</th>
+  	<th>Name</th>
+  	<th>Weight</th>
+  	<th>Edit</th>
+  	<th>Delete</th>
   </tr>
   <tr ng-repeat="paperType in types">
 	  <td>{{paperType.id}}</td>
 	  <td>{{paperType.name}}</td>
+	  <td>{{paperType.weight}}</td>
 	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getType(paperType.id)">Edit</button></td>
 	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteType(paperType.id)">Delete</button></td>
   </tr>
