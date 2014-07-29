@@ -1,70 +1,22 @@
 <div class="page-header">
   <h1>Conferences</h1>
 </div>
-<div class="row">
-<div class="col-md-4">
- <form role="form" name="conferenceForm" ng-submit="saveConference()" novalidate>
-  <div class="form-group" >
-    <label for="title">Title: *</label>
-    <input type="text" class="form-control" id="title" placeholder="Enter title" ng-model="conference.title" required>
-  </div>
-  <div class="form-group">
-    <label for="topic">Topic: *</label>
-    <input type="text" class="form-control" id="topic" placeholder="Enter topic" ng-model="conference.topic" required>
-  </div>
-  <div class="form-group">
-    <label for="editors">Editors: *</label>
-    <input type="text" class="form-control" id="editors" placeholder="Enter editors" ng-model="conference.editors" required>
-  </div>
-  <div class="row ">
-  <div class="form-group col-md-6">
-   <label for="dateFrom">Date from: *</label>
- <input type="date" class="form-control" id="dateFrom" placeholder="Enter date" ng-model="conference.dateFrom" required>
- </div>
- <div class="form-group col-md-6">
-   <label for="dateTo">Date to: *</label>
- <input type="date" class="form-control" id="dateTo" placeholder="Enter date" ng-model="conference.dateTo" required>
- </div>
-  </div>
-  <div class="form-group">
-    <label for="series">Springer series: *</label>
-    <input type="text" class="form-control" id="series" placeholder="Enter Springer series" ng-model="conference.series" required>
-  </div>
-  <div class="form-group">
-    <label for="issn">ISSN</label>
-    <input type="text" class="form-control" id="issn" placeholder="Enter ISSN" ng-model="conference.issn">
-  </div>
-  <div class="form-group">
-    <label for="isbn">ISBN</label>
-    <input type="text" class="form-control" id="isbn" placeholder="Enter ISBN" ng-model="conference.isbn">
-  </div>
-  <div class="form-group">
-    <label for="url">Springer URL</label>
-    <input type="text" class="form-control" id="url" placeholder="Enter Springer URL" ng-model="conference.url">
-  </div>
-  <div class="form-group">
-    <label for="venue">Venue: *</label>
-    <input type="text" class="form-control" id="venue" placeholder="Enter venue" ng-model="conference.venue" required>
-  </div>
- 
-  <button type="submit" class="btn btn-primary" ng-disabled="!conferenceForm.$valid" >Save</button>
-</form>
-
+<div class="create-btn">
+	<button class="btn btn-primary" ng-click="createNew()">
+		<i class="fa fa-fw fa-plus"></i> Add new conference
+	</button>
 </div>
-<div class="col-md-8">
-  <table class="table table-condensed table-striped table-bordered" ng-show="conferences.length">
-  <tr>
-  <th>Title</th><th>Topic</th><th>Date</th><th>Venue</th><th>ISSN</th><th>Edit</th><th>Delete</th>
+<table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered" ng-show="conferences.length">
+  <tr ng-repeat="conference in $data">
+  	<td data-title="'ID'" sortable="'id'">{{conference.id}}</td>
+	  <td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">{{conference.title}}</td>
+	  <td data-title="'Topic'" sortable="'topic'" filter="{ 'title': 'text' }">{{conference.topic}}</td>
+	  <td data-title="'Date'" sortable="'dateFrom'">{{conference.dateFrom | date : 'd'}} - {{conference.dateTo | date : 'd MMM yyyy'}}</td>
+	  <td data-title="'Venue'">{{conference.venue}}</td>
+	  <td data-title="'ISSN'" sortable="'issn'">{{conference.issn}}</td>
+	  <td data-title="'Edit'">
+	  	<button type="button" class="btn btn-default btn-xs" ng-click="getConference(conference.id)"><i class="fa fa-fw fa-edit"></i> Edit</button>
+	  	<button type="button" class="btn btn-danger btn-xs" ng-click="deleteConference(conference.id)"><i class="fa fa-fw fa-trash-o"></i> Delete</button>
+	  </td>
   </tr>
-  <tr ng-repeat="conference in conferences">
-	  <td>{{conference.title}}</td>
-	  <td>{{conference.topic}}</td>
-	  <td>{{conference.dateFrom | date : 'd'}} - {{conference.dateTo | date : 'd MMM yyyy'}}</td>
-	  <td>{{conference.venue}}</td>
-	  <td>{{conference.issn}}</td>
-	  <td><button type="button" class="btn btn-default btn-xs" ng-click="getConference(conference.id)">Edit</button></td>
-	  <td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteConference(conference.id)">Delete</button></td>
-  </tr>
-  </table>
-  </div>
-</div>
+</table>

@@ -1,7 +1,7 @@
 WPUtil = {
-  basePath: '/web-proceedings',
+  basePath: _contextPath,
   ctx: function(path) {
-    return "/web-proceedings" + path;
+    return _contextPath + path;
   }
 
 };

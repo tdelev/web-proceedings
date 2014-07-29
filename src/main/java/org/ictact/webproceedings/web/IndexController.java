@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,9 +105,8 @@ public class IndexController {
 		ModelAndView result = new ModelAndView("paper");
 		List<PaperAuthor> paperAuthors = paperAuthorService
 				.findByPaperId(paperId);
-		List<Conference> conferences = new ArrayList<Conference>(
-				confService.findAll());
-		Collections.sort(conferences);
+		List<Conference> conferences = confService
+				.findAllByOrderByDateFromDesc();
 		result.addObject("paper", paper);
 		result.addObject("authors", paperAuthors);
 		result.addObject("conferences", conferences);
