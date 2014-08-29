@@ -15,10 +15,12 @@ import org.apache.commons.io.IOUtils;
 import org.ictact.webproceedings.model.Author;
 import org.ictact.webproceedings.model.Conference;
 import org.ictact.webproceedings.model.Paper;
+import org.ictact.webproceedings.model.PaperAttachment;
 import org.ictact.webproceedings.model.PaperAuthor;
 import org.ictact.webproceedings.model.PaperType;
 import org.ictact.webproceedings.service.AuthorService;
 import org.ictact.webproceedings.service.ConferenceService;
+import org.ictact.webproceedings.service.PaperAttachmentService;
 import org.ictact.webproceedings.service.PaperAuthorService;
 import org.ictact.webproceedings.service.PaperService;
 import org.ictact.webproceedings.service.PaperTypeService;
@@ -53,6 +55,9 @@ public class IndexController {
 
 	@Autowired
 	private PaperAuthorService paperAuthorService;
+
+	@Autowired
+	private PaperAttachmentService paperAttachmentService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
@@ -106,9 +111,14 @@ public class IndexController {
 				.findByPaperId(paperId);
 		List<Conference> conferences = confService
 				.findAllByOrderByDateFromDesc();
+
+		List<PaperAttachment> attachments = paperAttachmentService
+				.findByObjectId(paperId);
+		boolean hasAttachments = (attachments != null && attachments.size() > 0);
 		result.addObject("paper", paper);
 		result.addObject("authors", paperAuthors);
 		result.addObject("conferences", conferences);
+		result.addObject("hasAttachments", hasAttachments);
 		return result;
 	}
 
@@ -133,37 +143,11 @@ public class IndexController {
 		return result;
 	}
 
-	@RequestMapping("/paper/download/{id}")
-	public String downloadPaperById(@PathVariable("id") Long id,
-			HttpServletResponse response) {
-		Paper paper = paperService.findById(id);
-		writeFileToResponse(paper, response);
-		return null;
-	}
-
 	@RequestMapping("/paper/citation/{id}/bibtex")
 	public void bibTexCitation(@PathVariable("id") Long id,
 			HttpServletResponse response) {
 		Paper paper = paperService.findById(id);
 		writeTextToResponse(CitationManager.bibtex(paper), response);
-	}
-
-	private void writeFileToResponse(Paper paper, HttpServletResponse response) {
-		try {
-			OutputStream out = response.getOutputStream();
-			String contentDisposition = String.format("inline;filename=\"%s\"",
-					paper.getPaperFileName());
-			response.setHeader("Content-Disposition", contentDisposition);
-			response.setContentType(paper.getFileContentType());
-			response.setContentLength((int) paper.getPaperFile().length());
-			IOUtils.copy(paper.getPaperFile().getBinaryStream(), out);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void writeTextToResponse(String text, HttpServletResponse response) {

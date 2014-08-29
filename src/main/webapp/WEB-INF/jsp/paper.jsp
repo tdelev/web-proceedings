@@ -55,8 +55,8 @@
 							<c:if test="${paper.url != null}">
 								<p><a href="${paper.url}"><i class="fa fa-fw fa-file-pdf-o"></i> Springer</a></p>
 							</c:if>
-							<c:if test="${paper.paperFileName != null }">
-								<p><a href="${pageContext.request.contextPath}/paper/download/${paper.id}"><i class="fa fa-fw fa-file-pdf-o"></i> PDF</a></p>
+							<c:if test="${hasAttachments}">
+								<p><a href="${pageContext.request.contextPath}/attachment/paper/${paper.id}"><i class="fa fa-fw fa-file-pdf-o"></i> PDF</a></p>
 							</c:if>
 						</div>
 						<c:if test="${paper.paperFileName != null }">

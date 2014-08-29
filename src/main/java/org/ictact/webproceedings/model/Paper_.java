@@ -7,4 +7,9 @@ import javax.persistence.metamodel.StaticMetamodel;
 public class Paper_ {
 
 	public static volatile SingularAttribute<Paper, String> title;
+	
+	public static volatile SingularAttribute<Paper, Conference> conference;
+	
+	public static volatile SingularAttribute<Paper, PaperType> type;
+	
 }

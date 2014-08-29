@@ -179,13 +179,16 @@ WP.controller('PaperController', [
     '$modal',
     'Paper',
     'Conference',
+    'Attachment',
     'PaperType',
     'ngTableParams',
-    function($scope, $filter, $upload, $modal, Paper, Conference, PaperType,
-            ngTableParams) {
+    'toaster',
+    function($scope, $filter, $upload, $modal, Paper, Conference, Attachment, PaperType,
+            ngTableParams, toaster) {
       $scope.paper = {};
       $scope.conferences = Conference.query();
       $scope.types = PaperType.query();
+      
       // Paper.query(function(data) {
       // $scope.papers = data;
       var tableParams = {
@@ -197,6 +200,7 @@ WP.controller('PaperController', [
         getData: function($defer, params) {
           Paper.paged(params.url(), function(data) {
             params.total(data.totalElements);
+            $scope.totalElements = data.totalElements;
             $defer.resolve(data.content);
           });
           /*
@@ -210,6 +214,7 @@ WP.controller('PaperController', [
            */
         }
       });
+      
       // });
       $scope.modalCreate = $modal({
         scope: $scope,
@@ -230,10 +235,15 @@ WP.controller('PaperController', [
           $scope.paper = {};
           // $scope.form.$setPristine();
           $scope.modalCreate.hide();
+          toaster.pop('success', 'Success', 'Paper saved');
         });
       };
 
       $scope.getPaper = function(id) {
+        $scope.attachments = Attachment.getAttachmentsByObjectId({
+          id: id,
+          bean: 'paper_attachment'
+        });
         $scope.paper = Paper.get({
           id: id
         }, function() {
@@ -248,24 +258,33 @@ WP.controller('PaperController', [
           $scope.paper = {};
         });
       };
-
       $scope.onFileSelect = function($files) {
         function onSuccess(data, status, headers, config) {
-          $scope.paper = data;
+          $scope.attachments = Attachment.getAttachmentsByObjectId({
+            id: $scope.paper.id,
+            bean: 'paper_attachment'
+          });
+          toaster.pop('success', 'Success', 'Paper file uploaded');
         }
         function onError(data, status, headers, config) {
-          console.log("error");
+          toaster.pop('error', 'Error', 'Paper file upload failed');
         }
         for (var i = 0; i < $files.length; i++) {
           var file = $files[i];
           $scope.upload = $upload.upload({
-            url: WPUtil.ctx("/data/rest/papers/file/" + $scope.paper.id),
+            url: WPUtil.ctx("/data/rest/attachments/paper/" + $scope.paper.id),
             data: {
               id: $scope.paper.id
             },
             file: file
           }).success(onSuccess).error(onError);
         }
+      };
+      
+      $scope.clearFilters = function() {
+        delete $scope.table.$params.filter.conference;
+        delete $scope.table.$params.filter.type;
+        delete $scope.table.$params.filter.title;
       };
 
       $scope.basePath = WPUtil.basePath;

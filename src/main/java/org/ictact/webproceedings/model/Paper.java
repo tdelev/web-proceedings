@@ -1,13 +1,10 @@
 package org.ictact.webproceedings.model;
 
-import java.sql.Blob;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -49,36 +46,11 @@ public class Paper extends BaseEntity {
 
 	@NotEmpty
 	private String keywords;
-
-	@JsonIgnore
-	@Basic(fetch = FetchType.LAZY)
-	@Lob
-	private Blob paperFile;
-
-	private String fileContentType;
-
-	private String paperFileName;
-
+	
 	@NotEmpty
 	private String pages;
 
 	private String url;
-
-	public String getFileContentType() {
-		return fileContentType;
-	}
-
-	public void setFileContentType(String fileContentType) {
-		this.fileContentType = fileContentType;
-	}
-
-	public String getPaperFileName() {
-		return paperFileName;
-	}
-
-	public void setPaperFileName(String paperFileName) {
-		this.paperFileName = paperFileName;
-	}
 
 	public String getPages() {
 		return pages;
@@ -118,14 +90,6 @@ public class Paper extends BaseEntity {
 
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
-	}
-
-	public Blob getPaperFile() {
-		return paperFile;
-	}
-
-	public void setPaperFile(Blob paperFile) {
-		this.paperFile = paperFile;
 	}
 
 	public String getPaperAbstract() {
