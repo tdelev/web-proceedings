@@ -70,10 +70,16 @@ WP.controller('AuthorsController', [
       };
     }]);
 
-WP.controller('ConferencesController', ['$scope', '$filter', '$upload', '$modal',
-    'Conference', 'ngTableParams', function($scope, $filter, $upload, $modal, Conference, ngTableParams) {
+WP.controller('ConferencesController', [
+    '$scope',
+    '$filter',
+    '$upload',
+    '$modal',
+    'Conference',
+    'ngTableParams',
+    function($scope, $filter, $upload, $modal, Conference, ngTableParams) {
       $scope.conference = {};
-      
+
       Conference.query(function(data) {
         $scope.conferences = data;
         var tableParams = {
@@ -95,7 +101,7 @@ WP.controller('ConferencesController', ['$scope', '$filter', '$upload', '$modal'
           }
         });
       });
-      
+
       $scope.modalCreate = $modal({
         scope: $scope,
         title: 'Create conference',
@@ -108,7 +114,7 @@ WP.controller('ConferencesController', ['$scope', '$filter', '$upload', '$modal'
         $scope.conference = {};
         $scope.modalCreate.show();
       };
-      
+
       $scope.save = function() {
         Conference.save($scope.conference, function(conference) {
           $scope.conferences = Conference.query();
@@ -180,27 +186,31 @@ WP.controller('PaperController', [
       $scope.paper = {};
       $scope.conferences = Conference.query();
       $scope.types = PaperType.query();
-      Paper.query(function(data) {
-        $scope.papers = data;
-        var tableParams = {
-          page: 1,
-          count: 10,
-        };
-        $scope.table = new ngTableParams(tableParams, {
-          total: $scope.papers.length, // length of data
-          getData: function($defer, params) {
-            // filtering
-            var filteredData = params.filter() ? $filter('filter')(
-                    $scope.papers, params.filter()) : $scope.papers;
-            // sorting
-            var sortedData = params.sorting() ? $filter('orderBy')(
-                    filteredData, params.orderBy()) : $scope.papers;
-            params.total(sortedData.length);
-            $defer.resolve(sortedData.slice((params.page() - 1)
-                    * params.count(), params.page() * params.count()));
-          }
-        });
+      // Paper.query(function(data) {
+      // $scope.papers = data;
+      var tableParams = {
+        page: 1,
+        count: 10
+      };
+      $scope.table = new ngTableParams(tableParams, {
+        total: 0, // length of data
+        getData: function($defer, params) {
+          Paper.paged(params.url(), function(data) {
+            params.total(data.totalElements);
+            $defer.resolve(data.content);
+          });
+          /*
+           * // filtering var filteredData = params.filter() ?
+           * $filter('filter')( $scope.papers, params.filter()) : $scope.papers; //
+           * sorting var sortedData = params.sorting() ? $filter('orderBy')(
+           * filteredData, params.orderBy()) : $scope.papers;
+           * params.total(sortedData.length);
+           * $defer.resolve(sortedData.slice((params.page() - 1) params.count(),
+           * params.page() * params.count()));
+           */
+        }
       });
+      // });
       $scope.modalCreate = $modal({
         scope: $scope,
         title: 'Create paper',
@@ -216,10 +226,7 @@ WP.controller('PaperController', [
 
       $scope.save = function() {
         Paper.save($scope.paper, function(paper) {
-          Paper.query(function(data) {
-            $scope.papers = data;
-            $scope.table.reload();
-          });
+          $scope.table.reload();
           $scope.paper = {};
           // $scope.form.$setPristine();
           $scope.modalCreate.hide();
@@ -237,10 +244,7 @@ WP.controller('PaperController', [
         Paper.remove({
           id: id
         }, function() {
-          Paper.query(function(data) {
-            $scope.papers = data;
-            $scope.table.reload();
-          });
+          $scope.table.reload();
           $scope.paper = {};
         });
       };
@@ -263,7 +267,7 @@ WP.controller('PaperController', [
           }).success(onSuccess).error(onError);
         }
       };
-      
+
       $scope.basePath = WPUtil.basePath;
 
     }]);

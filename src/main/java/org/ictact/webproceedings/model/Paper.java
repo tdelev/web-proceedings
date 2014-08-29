@@ -3,9 +3,11 @@ package org.ictact.webproceedings.model;
 import java.sql.Blob;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -49,6 +51,8 @@ public class Paper extends BaseEntity {
 	private String keywords;
 
 	@JsonIgnore
+	@Basic(fetch = FetchType.LAZY)
+	@Lob
 	private Blob paperFile;
 
 	private String fileContentType;

@@ -6,7 +6,8 @@
 		<i class="fa fa-fw fa-plus"></i> Add new paper
 	</button>
 </div>
-<table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered" ng-show="papers.length">
+
+<table ng-table="table" show-filter="true" class="table table-condensed table-striped table-bordered">
   <tr ng-repeat="paper in $data">
   	<td data-title="'ID'" sortable="'id'">{{paper.id}}</td>
   	<td data-title="'Number'" sortable="'number'">{{paper.number}}</td>

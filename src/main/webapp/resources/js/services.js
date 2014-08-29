@@ -23,7 +23,12 @@ WP.factory('UserService', function($resource) {
 });
 
 WP.factory('Paper', [ '$resource', function($resource) {
-	return $resource(WPUtil.ctx('/data/rest/papers/:id'), {});
+	return $resource(WPUtil.ctx('/data/rest/papers/:id'), {}, {
+	  'paged': {
+	    method: 'GET',
+	    url: WPUtil.ctx('/data/rest/papers/paged')
+	  }
+	});
 } ]);
 
 WP.factory('Author', [ '$resource', function($resource) {
