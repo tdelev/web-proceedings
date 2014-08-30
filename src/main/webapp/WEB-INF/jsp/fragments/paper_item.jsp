@@ -3,6 +3,7 @@
 		<i class="fa fa-angle-right"></i> <a href="${pageContext.request.contextPath}/${paper.conference.year}/paper/${paper.id}/${paper.titleSlug}">${paper.title}</a>
 	</h4>
 	<div class="paper-authors">
+	<span class="pages">(${paper.number}) pp. ${paper.pages}</span>
 	<c:forEach var="pa" items="${paper.paperAuthors}" varStatus="loop">
 	<span class="list-group-item-text">
 		<a href="${pageContext.request.contextPath}/authors/${pa.author.id}/${pa.author.slug}">${pa.author.firstName}
@@ -22,6 +23,5 @@
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
-	<span class="pages">pp. ${paper.pages}</span>
 	</div>
 </div>

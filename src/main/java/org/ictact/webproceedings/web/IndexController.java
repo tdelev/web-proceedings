@@ -95,11 +95,13 @@ public class IndexController {
 		ModelAndView result = new ModelAndView("conference");
 		result.addObject("conference", conf);
 		ConferenceMeta meta = cmService.findByConferenceId(conferenceId);
-		MarkdownProcessor mp = new MarkdownProcessor();
-		String preface = mp.markdown(meta.getPreface());
-		String committees = mp.markdown(meta.getCommittees());
-		result.addObject("preface", preface);
-		result.addObject("committees", committees);
+		if(meta != null) {
+			MarkdownProcessor mp = new MarkdownProcessor();
+			String preface = mp.markdown(meta.getPreface());
+			String committees = mp.markdown(meta.getCommittees());
+			result.addObject("preface", preface);
+			result.addObject("committees", committees);
+		}
 		return result;
 	}
 

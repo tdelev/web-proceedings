@@ -16,7 +16,7 @@
 		</ol>
 		
 		<div class="page-header">
-	  		<h1>Authors Index <small>(${total})</small></h1>
+	  		<h1>Authors index <small>(${total})</small></h1>
 		</div>
 		<div class="index-letters">
 		<c:forEach var="key" items="${letters}">
