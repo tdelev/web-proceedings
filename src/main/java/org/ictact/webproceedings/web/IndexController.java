@@ -3,22 +3,25 @@ package org.ictact.webproceedings.web;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.ictact.webproceedings.model.Author;
 import org.ictact.webproceedings.model.Conference;
+import org.ictact.webproceedings.model.ConferenceMeta;
 import org.ictact.webproceedings.model.Paper;
 import org.ictact.webproceedings.model.PaperAttachment;
 import org.ictact.webproceedings.model.PaperAuthor;
 import org.ictact.webproceedings.model.PaperType;
 import org.ictact.webproceedings.service.AuthorService;
+import org.ictact.webproceedings.service.ConferenceMetaService;
 import org.ictact.webproceedings.service.ConferenceService;
 import org.ictact.webproceedings.service.PaperAttachmentService;
 import org.ictact.webproceedings.service.PaperAuthorService;
@@ -26,7 +29,10 @@ import org.ictact.webproceedings.service.PaperService;
 import org.ictact.webproceedings.service.PaperTypeService;
 import org.ictact.webproceedings.util.CitationManager;
 import org.ictact.webproceedings.util.ResourceNotFoundException;
+import org.markdownj.MarkdownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +65,9 @@ public class IndexController {
 	@Autowired
 	private PaperAttachmentService paperAttachmentService;
 
+	@Autowired
+	private ConferenceMetaService cmService;
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
 		List<Conference> conferences = confService
@@ -79,11 +88,26 @@ public class IndexController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/conference/{conferenceId}/{\\S+}", method = RequestMethod.GET)
-	public ModelAndView conference(@PathVariable Long conferenceId) {
+	@RequestMapping(value = "/conferences/{year:\\d{4}}/{conferenceId:\\d+}", method = RequestMethod.GET)
+	public ModelAndView conference(@PathVariable Long conferenceId)
+			throws IOException {
+		Conference conf = confService.findById(conferenceId);
+		ModelAndView result = new ModelAndView("conference");
+		result.addObject("conference", conf);
+		ConferenceMeta meta = cmService.findByConferenceId(conferenceId);
+		MarkdownProcessor mp = new MarkdownProcessor();
+		String preface = mp.markdown(meta.getPreface());
+		String committees = mp.markdown(meta.getCommittees());
+		result.addObject("preface", preface);
+		result.addObject("committees", committees);
+		return result;
+	}
+
+	@RequestMapping(value = "/conferences/{year:\\d{4}}/{conferenceId:\\d+}/papers", method = RequestMethod.GET)
+	public ModelAndView papers(@PathVariable Long conferenceId) {
 		Conference conf = confService.findById(conferenceId);
 		List<Paper> papers = paperService.findByConferenceId(conferenceId);
-		ModelAndView result = new ModelAndView("conference");
+		ModelAndView result = new ModelAndView("papers");
 		List<PaperType> types = paperTypeService.findAllByWeight();
 		result.addObject("conference", conf);
 		result.addObject("papers", papers);
@@ -102,8 +126,8 @@ public class IndexController {
 		return result;
 	}
 
-	@RequestMapping(value = "/{conferenceTitle:[a-zA-Z0-9-]+}/paper/{paperId:\\d+}/{\\S+}", method = RequestMethod.GET)
-	public ModelAndView paper(@PathVariable String conferenceTitle,
+	@RequestMapping(value = "/{year:\\d{4}}/paper/{paperId:\\d+}/{\\S+}", method = RequestMethod.GET)
+	public ModelAndView paper(@PathVariable String year,
 			@PathVariable Long paperId) {
 		Paper paper = paperService.findById(paperId);
 		ModelAndView result = new ModelAndView("paper");
@@ -111,7 +135,6 @@ public class IndexController {
 				.findByPaperId(paperId);
 		List<Conference> conferences = confService
 				.findAllByOrderByDateFromDesc();
-
 		List<PaperAttachment> attachments = paperAttachmentService
 				.findByObjectId(paperId);
 		boolean hasAttachments = (attachments != null && attachments.size() > 0);
@@ -124,12 +147,35 @@ public class IndexController {
 
 	@RequestMapping(value = "/authors", method = RequestMethod.GET)
 	public ModelAndView authors() {
-		List<Author> authors = new ArrayList<Author>(authorService.findAll());
-		return new ModelAndView("author", "authors", authors);
+		List<Author> authors = authorService.findAll(new Sort(Direction.ASC,
+				"lastName"));
+		Map<Character, List<Author>> index = new TreeMap<Character, List<Author>>();
+		List<Character> letters = new ArrayList<Character>();
+		for (char x = 'A'; x <= 'Z'; ++x) {
+			index.put(x, new ArrayList<Author>());
+			letters.add(x);
+		}
+		for (Author author : authors) {
+			char key = Character.toUpperCase(author.getLastName().charAt(0));
+			List<Author> list = index.get(key);
+			if (list != null) {
+				list.add(author);
+			} else {
+				list = new ArrayList<Author>();
+				list.add(author);
+				index.put(key, list);
+				letters.add(key);
+			}
+		}
+		Collections.sort(letters);
+		ModelAndView result = new ModelAndView("authors", "index", index);
+		result.addObject("letters", letters);
+		result.addObject("total", authors.size());
+		return result;
 	}
 
-	@RequestMapping(value = "/author/{authorId}/{\\S+}", method = RequestMethod.GET)
-	public ModelAndView papersByAuthor(@PathVariable Long authorId) {
+	@RequestMapping(value = "/authors/{authorId}/{\\S+}", method = RequestMethod.GET)
+	public ModelAndView authorPapers(@PathVariable Long authorId) {
 		Author author = authorService.findById(authorId);
 		List<PaperAuthor> paperList = paperAuthorService
 				.findByAuthorId(authorId);
@@ -137,13 +183,14 @@ public class IndexController {
 		for (PaperAuthor paper : paperList) {
 			papers.add(paper.getPaper());
 		}
-		ModelAndView result = new ModelAndView("papersByAuthor");
+		ModelAndView result = new ModelAndView("authorPapers");
 		result.addObject("papers", papers);
 		result.addObject("author", author);
+		result.addObject("total", papers.size());
 		return result;
 	}
 
-	@RequestMapping("/paper/citation/{id}/bibtex")
+	@RequestMapping("/paper/{id}/citation/bibtex")
 	public void bibTexCitation(@PathVariable("id") Long id,
 			HttpServletResponse response) {
 		Paper paper = paperService.findById(id);

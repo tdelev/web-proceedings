@@ -1,7 +1,5 @@
 package org.ictact.webproceedings.web.rest;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +29,7 @@ public class PaperTypeResources {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public List<PaperType> getAll() {
-		Collection<PaperType> paperTypes = service.findAll();
-		return new ArrayList<PaperType>(paperTypes);
+		return service.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")

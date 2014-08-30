@@ -59,19 +59,17 @@
 								<p><a href="${pageContext.request.contextPath}/attachment/paper/${paper.id}"><i class="fa fa-fw fa-file-pdf-o"></i> PDF</a></p>
 							</c:if>
 						</div>
-						<c:if test="${paper.paperFileName != null }">
 						<div class="sidebar-module sidebar-module-inset">
 							<h4>Export citation</h4>
 							<ul class="list-inline">
-								<li><a href="${pageContext.request.contextPath}/paper/citation/${paper.id}/bibtex"><i class="fa fa-fw fa-file-text"></i> BibTex</a></li>
+								<li><a href="${pageContext.request.contextPath}/paper/${paper.id}/citation/bibtex"><i class="fa fa-fw fa-file-text"></i> BibTex</a></li>
 							</ul>
 						</div>
-						</c:if>
 						<div class="sidebar-module">
 							<h4>Conferences</h4>
 							<ul class="list-unstyled">
 								<c:forEach var="conf" items="${conferences}">
-									<li><a href="${pageContext.request.contextPath}/conference/${conf.id}/${conf.titleSlug}">${conf.title}</a></li>
+									<li><a href="${pageContext.request.contextPath}/conferences/${conf.year}/${conf.id}">${conf.title}</a></li>
 								</c:forEach>
 							</ul>
 						</div>

@@ -42,7 +42,7 @@
   	<td data-title="'Pages'">{{ paper.pages }}</td>
 	<td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">{{paper.title}}</td>
 	<td data-title="'Type'" sortable="'type.name'">{{paper.type.name}}</td>
-	<td data-title="'Conference'" sortable="'conference.title'" filter="{ 'conference.title': 'text' }">{{paper.conference.title}}</td>
+	<td data-title="'Conference'" sortable="'conference.title'">{{paper.conference.title}}</td>
 	<td data-title="'Authors'"><a class="btn btn-info btn-xs" ng-href="#/paper/{{paper.id}}/authors"><i class="fa fa-fw fa-group"></i> Authors</a></td>
 	<td data-title="'Edit'">
 		<button type="button" class="btn btn-default btn-xs" ng-click="getPaper(paper.id)"><i class="fa fa-fw fa-edit"></i> Edit</button>

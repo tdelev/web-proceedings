@@ -282,3 +282,30 @@ h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6 {
 .papers {
 	margin-bottom: 40px;
 }
+.top-margin {
+	margin-top: 20px;
+}
+ul.index {
+	-moz-column-count: 4;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 4;
+    -webkit-column-gap: 20px;
+    column-count: 4;
+    column-gap: 20px;
+}
+.index-letters h2 {
+	display: block;
+	width: 20px;
+	float: left;
+}
+.index-authors {
+	margin-top: 20px;
+	clear: both;
+}
+.index-authors h2 {
+	border-top: dotted 2px #e5e5e5;
+}
+.authors-link {
+	float: right;
+	padding-top: 16px;
+}

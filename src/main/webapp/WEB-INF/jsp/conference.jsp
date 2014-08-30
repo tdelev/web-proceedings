@@ -33,23 +33,18 @@
 	</div>
 	<div class="paper-types">
 		<ul class="nav nav-pills">
-			<c:forEach var="type" items="${types}">
-				<c:if test="${not empty papersMap[type.id]}">
-  					<li><a href="#${type.id}">${type.name}</a></li>
-  				</c:if>
-  			</c:forEach>
+			<li><a href="#preface">Preface</a></li>
+			<li><a href="#committees">Committees</a></li>
+			<li><a href="${pageContext.request.contextPath}/conferences/${conference.year}/${conference.id}/papers">Papers</a></li>
+			<li><a href="${pageContext.request.contextPath}/attachment/conference/${conference.id}"><i class="fa fa-fw fa-file-pdf-o"></i> PDF</a></li>
 		</ul>
-	</div>
-	<div class="papers">
-		<c:forEach var="type" items="${types}">
-			<c:if test="${not empty papersMap[type.id]}">
-				<h3 class="paper-type" id="${type.id}">${type.name}</h3>
-				<c:forEach var="paper" items="${papersMap[type.id]}">
-					<%@include file="fragments/paper_item.jsp" %>
-				</c:forEach>
-			</c:if>
-		</c:forEach>
-	</div>
+		</div>
+		<div id="preface" class="preface">
+			${preface}
+		</div>
+		<div id="committees" class="committees">
+			${committees}
+		</div>
 	</div>
 	<!-- /container -->
 

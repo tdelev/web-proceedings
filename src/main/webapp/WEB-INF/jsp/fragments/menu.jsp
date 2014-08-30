@@ -8,5 +8,8 @@
       		</div>
       		<h1 class="site-header">Innovations</h1>
       		<h2 class="site-promo">Conference Web Proceedings</h2>
+      		<div class="authors-link">
+	      		<a href="${pageContext.request.contextPath}/authors/">Authors index</a>
+      		</div>
       </div>
     </div>

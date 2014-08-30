@@ -1,6 +1,5 @@
 package org.ictact.webproceedings.web.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +37,7 @@ public class PaperResource {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public List<Paper> getAll() {
-		return new ArrayList<Paper>(service.findAll());
+		return service.findAll();
 	}
 
 	@RequestMapping(value = "/paged", method = RequestMethod.GET, produces = "application/json")

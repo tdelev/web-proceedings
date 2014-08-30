@@ -76,8 +76,11 @@ WP.controller('ConferencesController', [
     '$upload',
     '$modal',
     'Conference',
+    'Attachment',
     'ngTableParams',
-    function($scope, $filter, $upload, $modal, Conference, ngTableParams) {
+    'toaster',
+    function($scope, $filter, $upload, $modal, Conference, Attachment,
+            ngTableParams, toaster) {
       $scope.conference = {};
 
       Conference.query(function(data) {
@@ -119,6 +122,7 @@ WP.controller('ConferencesController', [
         Conference.save($scope.conference, function(conference) {
           $scope.conferences = Conference.query();
           $scope.conference = {};
+          toaster.pop('success', 'Success', 'Conference saved');
         });
       };
 
@@ -126,6 +130,10 @@ WP.controller('ConferencesController', [
         $scope.conference = Conference.get({
           id: id
         }, function() {
+          $scope.attachments = Attachment.getAttachmentsByObjectId({
+            id: $scope.conference.id,
+            bean: 'conference_attachment'
+          });
           $scope.modalCreate.show();
         });
       };
@@ -139,8 +147,34 @@ WP.controller('ConferencesController', [
           });
           $scope.conference = {};
         });
-
       };
+
+      $scope.onFileSelect = function($files) {
+        function onSuccess(data, status, headers, config) {
+          $scope.attachments = Attachment.getAttachmentsByObjectId({
+            id: $scope.conference.id,
+            bean: 'conference_attachment'
+          });
+          toaster.pop('success', 'Success', 'Conference file uploaded');
+        }
+        function onError(data, status, headers, config) {
+          toaster.pop('error', 'Error', 'Conference file upload failed');
+        }
+        for (var i = 0; i < $files.length; i++) {
+          var file = $files[i];
+          $scope.upload = $upload.upload(
+                  {
+                    url: WPUtil.ctx("/data/rest/attachments/conference/"
+                            + $scope.conference.id),
+                    data: {
+                      id: $scope.conference.id
+                    },
+                    file: file
+                  }).success(onSuccess).error(onError);
+        }
+      };
+
+      $scope.basePath = WPUtil.basePath;
 
     }]);
 
@@ -183,12 +217,12 @@ WP.controller('PaperController', [
     'PaperType',
     'ngTableParams',
     'toaster',
-    function($scope, $filter, $upload, $modal, Paper, Conference, Attachment, PaperType,
-            ngTableParams, toaster) {
+    function($scope, $filter, $upload, $modal, Paper, Conference, Attachment,
+            PaperType, ngTableParams, toaster) {
       $scope.paper = {};
       $scope.conferences = Conference.query();
       $scope.types = PaperType.query();
-      
+
       // Paper.query(function(data) {
       // $scope.papers = data;
       var tableParams = {
@@ -214,7 +248,7 @@ WP.controller('PaperController', [
            */
         }
       });
-      
+
       // });
       $scope.modalCreate = $modal({
         scope: $scope,
@@ -280,7 +314,7 @@ WP.controller('PaperController', [
           }).success(onSuccess).error(onError);
         }
       };
-      
+
       $scope.clearFilters = function() {
         delete $scope.table.$params.filter.conference;
         delete $scope.table.$params.filter.type;
@@ -371,3 +405,59 @@ WP.controller('AuthorsImportController', ['$scope', '$upload',
       };
 
     }]);
+
+WP.controller('ConferenceMetaController',
+        [
+            '$scope',
+            '$routeParams',
+            '$modal',
+            'ConferenceMeta',
+            'Conference',
+            'toaster',
+            function($scope, $routeParams, $modal, ConferenceMeta, Conference,
+                    toaster) {
+              $scope.conference = Conference.get({
+                id: $routeParams.id
+              });
+              function initEditors() {
+                $("#preface").markdown({
+                  autofocus: true,
+                  savable: true,
+                  onSave: function(e) {
+                    $scope.meta.preface = e.getContent();
+                    $scope.saveMeta();
+                  },
+                  onShow: function(e) {
+                    e.setContent($scope.meta.preface);
+                  }
+                });
+                $("#committees").markdown({
+                  savable: true,
+                  onSave: function(e) {
+                    $scope.meta.committees = e.getContent();
+                    $scope.saveMeta();
+                  },
+                  onShow: function(e) {
+                    e.setContent($scope.meta.committees);
+                  }
+                });
+              }
+
+              ConferenceMeta.getByConferenceId({
+                id: $routeParams.id
+              }, function(meta) {
+                $scope.meta = meta;
+                initEditors();
+              }, function(error) {
+                $scope.meta = {};
+                initEditors();
+              });
+
+              $scope.saveMeta = function() {
+                $scope.meta.conference = $scope.conference;
+                ConferenceMeta.save($scope.meta, function(meta) {
+                  toaster.pop('success', 'Success', 'Conference meta saved');
+                });
+              };
+
+            }]);

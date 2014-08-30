@@ -1,42 +1,58 @@
-  <div class="form-group" >
-    <label for="title">Title: *</label>
-    <input type="text" class="form-control" id="title" placeholder="Enter title" ng-model="conference.title" required>
-  </div>
-  <div class="form-group">
-    <label for="topic">Topic: *</label>
-    <input type="text" class="form-control" id="topic" placeholder="Enter topic" ng-model="conference.topic" required>
-  </div>
-  <div class="form-group">
-    <label for="editors">Editors: *</label>
-    <input type="text" class="form-control" id="editors" placeholder="Enter editors" ng-model="conference.editors" required>
-  </div>
-  <div class="row ">
-  <div class="form-group col-md-6">
-   <label for="dateFrom">Date from: *</label>
- <input type="date" class="form-control" id="dateFrom" placeholder="Enter date" ng-model="conference.dateFrom" required>
- </div>
- <div class="form-group col-md-6">
-   <label for="dateTo">Date to: *</label>
- <input type="date" class="form-control" id="dateTo" placeholder="Enter date" ng-model="conference.dateTo" required>
- </div>
-  </div>
-  <div class="form-group">
-    <label for="series">Springer series: *</label>
-    <input type="text" class="form-control" id="series" placeholder="Enter Springer series" ng-model="conference.series" required>
-  </div>
-  <div class="form-group">
-    <label for="issn">ISSN</label>
-    <input type="text" class="form-control" id="issn" placeholder="Enter ISSN" ng-model="conference.issn">
-  </div>
-  <div class="form-group">
-    <label for="isbn">ISBN</label>
-    <input type="text" class="form-control" id="isbn" placeholder="Enter ISBN" ng-model="conference.isbn">
-  </div>
-  <div class="form-group">
-    <label for="url">Springer URL</label>
-    <input type="text" class="form-control" id="url" placeholder="Enter Springer URL" ng-model="conference.url">
-  </div>
-  <div class="form-group">
-    <label for="venue">Venue: *</label>
-    <input type="text" class="form-control" id="venue" placeholder="Enter venue" ng-model="conference.venue" required>
-  </div>
+<div class="form-group">
+	<label for="title">Title: *</label> <input type="text"
+		class="form-control" id="title" placeholder="Enter title"
+		ng-model="conference.title" required>
+</div>
+<div class="form-group">
+	<label for="topic">Topic: *</label> <input type="text"
+		class="form-control" id="topic" placeholder="Enter topic"
+		ng-model="conference.topic" required>
+</div>
+<div class="form-group">
+	<label for="editors">Editors: *</label> <input type="text"
+		class="form-control" id="editors" placeholder="Enter editors"
+		ng-model="conference.editors" required>
+</div>
+<div class="row ">
+	<div class="form-group col-md-6">
+		<label for="dateFrom">Date from: *</label> <input type="date"
+			class="form-control" id="dateFrom" placeholder="Enter date"
+			ng-model="conference.dateFrom" required>
+	</div>
+	<div class="form-group col-md-6">
+		<label for="dateTo">Date to: *</label> <input type="date"
+			class="form-control" id="dateTo" placeholder="Enter date"
+			ng-model="conference.dateTo" required>
+	</div>
+</div>
+<div class="form-group">
+	<label for="series">Springer series: *</label> <input type="text"
+		class="form-control" id="series" placeholder="Enter Springer series"
+		ng-model="conference.series" required>
+</div>
+<div class="form-group">
+	<label for="issn">ISSN</label> <input type="text" class="form-control"
+		id="issn" placeholder="Enter ISSN" ng-model="conference.issn">
+</div>
+<div class="form-group">
+	<label for="isbn">ISBN</label> <input type="text" class="form-control"
+		id="isbn" placeholder="Enter ISBN" ng-model="conference.isbn">
+</div>
+<div class="form-group">
+	<label for="url">Springer URL</label> <input type="text"
+		class="form-control" id="url" placeholder="Enter Springer URL"
+		ng-model="conference.url">
+</div>
+<div class="form-group">
+	<label for="venue">Venue: *</label> <input type="text"
+		class="form-control" id="venue" placeholder="Enter venue"
+		ng-model="conference.venue" required>
+</div>
+<div class="form-group" ng-show="attachments.length">
+	<a href="{{ basePath }}/attachment/conference/{{conference.id}}"><i
+		class="fa fa-fw fa-file-pdf-o"></i> Download</a>
+</div>
+<div class="form-group" ng-show="conference.id">
+	<label for="file">File input</label> <input type="file"
+		ng-file-select="onFileSelect($files)">
+</div>

@@ -11,6 +11,9 @@ WP.config(['$routeProvider', '$locationProvider',
       }).when('/conferences', {
         templateUrl: 'views/conferences.html',
         controller: 'ConferencesController'
+      }).when('/conferences/:id/meta', {
+        templateUrl: 'views/conference_meta.html',
+        controller: 'ConferenceMetaController'
       }).when('/papers', {
         templateUrl: 'views/papers.html',
         controller: 'PaperController'

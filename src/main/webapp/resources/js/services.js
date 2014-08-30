@@ -51,6 +51,15 @@ WP.factory('PaperAuthor', ['$resource', function($resource) {
   });
 }]);
 
+WP.factory('ConferenceMeta', ['$resource', function($resource) {
+  return $resource(WPUtil.ctx('/data/rest/conference_meta/:id'), {}, {
+    'getByConferenceId': {
+      method: 'GET',
+      url: WPUtil.ctx('/data/rest/conference_meta/by_conference/:id')
+    }
+  });
+}]);
+
 WP.factory('Attachment', ['$resource', function($resource) {
   return $resource(WPUtil.ctx('/object/:id'), {}, {
     'getAttachmentsByObjectId': {

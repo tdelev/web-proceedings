@@ -1,6 +1,6 @@
 package org.ictact.webproceedings.service.impl;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.ictact.webproceedings.model.BaseEntity;
 import org.ictact.webproceedings.service.BaseEntityCrudService;
@@ -18,7 +18,7 @@ public abstract class BaseEntityCrudServiceImpl<T extends BaseEntity, R extends 
 	}
 
 	@Override
-	public Collection<T> findAll() {
+	public List<T> findAll() {
 		return getRepository().findAll();
 	}
 

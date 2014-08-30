@@ -13,9 +13,11 @@ import javax.sql.rowset.serial.SerialException;
 
 import org.ictact.webproceedings.exceptions.AttachmentBlobCreationException;
 import org.ictact.webproceedings.model.AAttachment;
+import org.ictact.webproceedings.model.ConferenceAttachment;
 import org.ictact.webproceedings.model.PaperAttachment;
 import org.ictact.webproceedings.service.AttachmentBaseEntityCrudService;
 import org.ictact.webproceedings.service.AttachmentService;
+import org.ictact.webproceedings.service.ConferenceAttachmentService;
 import org.ictact.webproceedings.service.PaperAttachmentService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,9 @@ public class AttachmentResource implements ApplicationContextAware {
 	
 	@Autowired
 	private PaperAttachmentService paService;
+	
+	@Autowired
+	private ConferenceAttachmentService caService;
 	
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
@@ -104,6 +109,32 @@ public class AttachmentResource implements ApplicationContextAware {
 			paperFile.setObjectId(id);
 			paService.save(paperFile);
 			return paperFile;
+		} else {
+			return null;
+		}
+	}
+	
+	@RequestMapping(value = "/conference/{id}", method = RequestMethod.POST, produces = "application/json")
+	public ConferenceAttachment addConferenceFile(MultipartFile file,
+			@PathVariable Long id) throws AttachmentBlobCreationException,
+			IOException {
+		if (file != null) {
+			List<ConferenceAttachment> attachments = caService.findByObjectId(id);
+			ConferenceAttachment conferenceFile = null;
+			if (attachments == null || attachments.isEmpty()) {
+				conferenceFile = new ConferenceAttachment();
+			} else {
+				conferenceFile = attachments.get(0);
+			}
+			try {
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				setAttachment(conferenceFile, file);
+			} catch (Exception e) {
+				throw new AttachmentBlobCreationException(e);
+			}
+			conferenceFile.setObjectId(id);
+			caService.save(conferenceFile);
+			return conferenceFile;
 		} else {
 			return null;
 		}

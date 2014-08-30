@@ -25,6 +25,7 @@
     <link href="${pageContext.request.contextPath}/resources/bower_components/select2/select2-bootstrap3.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/bower_components/angular-motion/dist/angular-motion.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/bower_components/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet">
 
@@ -80,6 +81,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="${pageContext.request.contextPath}/resources/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/bower_components/jquery-cookie/jquery.cookie.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/bower_components/momentjs/min/moment-with-langs.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/bower_components/angular/angular.js"></script>
@@ -111,6 +113,9 @@
   	<script src="${pageContext.request.contextPath}/resources/js/directives.js"></script>
   	<script src="${pageContext.request.contextPath}/resources/js/controllers.js"></script>
   	
+  	<script src="${pageContext.request.contextPath}/resources/bower_components/markdown/lib/markdown.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/bower_components/to-markdown/src/to-markdown.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/bower_components/bootstrap-markdown/js/bootstrap-markdown.js"></script>
   	
   	
   	<toaster-container toaster-options="{'time-out': 3000}"></toaster-container>

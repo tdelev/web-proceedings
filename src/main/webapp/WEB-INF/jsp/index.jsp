@@ -17,7 +17,7 @@
    			<div class="list-group jumbotron">
    				<div class="list-group-item">
 				<h1 class="list-group-item-heading">
-					<a href="${pageContext.request.contextPath}/conference/${latestConf.id}/${latestConf.titleSlug}">${latestConf.title}</a>
+					<a href="${pageContext.request.contextPath}/conferences/${latestConf.year}/${latestConf.id}">${latestConf.title}</a>
 				</h1>
 				<div class="row">
 					<div class="col-md-12">
@@ -42,7 +42,7 @@
       	 		<div class="list-group-item">
 				<h2 class="list-group-item-heading">
 				<i class="fa fa-fw fa-angle-double-right"></i>
-				<a href="${pageContext.request.contextPath}/conference/${conf.id}/${conf.titleSlug}">${conf.title}</a></h2>
+				<a href="${pageContext.request.contextPath}/conferences/${conf.year}/${conf.id}">${conf.title}</a></h2>
 					<p class="list-group-item-text conference-item-text"><label>Editors:</label> ${conf.editors}</p>
 					<p class="list-group-item-text conference-item-text"><label>Topic:</label> ${conf.topic}</p>
 				</div>

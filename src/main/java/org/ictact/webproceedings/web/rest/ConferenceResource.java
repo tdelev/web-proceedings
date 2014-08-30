@@ -1,13 +1,10 @@
 package org.ictact.webproceedings.web.rest;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.ictact.webproceedings.model.Author;
 import org.ictact.webproceedings.model.Conference;
 import org.ictact.webproceedings.service.ConferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +29,7 @@ public class ConferenceResource {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public List<Conference> getAll() {
-		Collection<Conference> conferences = service.findAll();
-		return new ArrayList<Conference>(conferences);
+		return service.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")

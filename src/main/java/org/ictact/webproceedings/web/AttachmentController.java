@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.ictact.webproceedings.model.AAttachment;
+import org.ictact.webproceedings.model.ConferenceAttachment;
 import org.ictact.webproceedings.model.PaperAttachment;
 import org.ictact.webproceedings.service.AttachmentService;
+import org.ictact.webproceedings.service.ConferenceAttachmentService;
 import org.ictact.webproceedings.service.PaperAttachmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +25,12 @@ public class AttachmentController {
 
 	@Autowired
 	private AttachmentService attachmentService;
-	
+
 	@Autowired
 	private PaperAttachmentService paService;
+
+	@Autowired
+	private ConferenceAttachmentService caService;
 
 	@RequestMapping(value = "/attachment/{id}", method = RequestMethod.GET)
 	public String download(@PathVariable("id") Long id,
@@ -34,14 +39,27 @@ public class AttachmentController {
 		writeFileToResponse(attachment, response);
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/attachment/paper/{id}", method = RequestMethod.GET)
 	public String downloadPaper(@PathVariable("id") Long id,
 			HttpServletResponse response) {
 		List<PaperAttachment> pa = paService.findByObjectId(id);
-		if(pa != null && pa.size() > 0) {
+		if (pa != null && pa.size() > 0) {
 			PaperAttachment file = pa.get(0);
-			if(file != null) {
+			if (file != null) {
+				writeFileToResponse(file, response);
+			}
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/attachment/conference/{id}", method = RequestMethod.GET)
+	public String downloadProceedings(@PathVariable("id") Long id,
+			HttpServletResponse response) {
+		List<ConferenceAttachment> ca = caService.findByObjectId(id);
+		if (ca != null && ca.size() > 0) {
+			ConferenceAttachment file = ca.get(0);
+			if (file != null) {
 				writeFileToResponse(file, response);
 			}
 		}
