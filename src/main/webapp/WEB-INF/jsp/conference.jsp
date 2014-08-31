@@ -36,7 +36,7 @@
 			<li><a href="#preface">Preface</a></li>
 			<li><a href="#committees">Committees</a></li>
 			<li><a href="${pageContext.request.contextPath}/conferences/${conference.year}/${conference.id}/papers">Papers</a></li>
-			<li><a href="${pageContext.request.contextPath}/attachment/conference/${conference.id}"><i class="fa fa-fw fa-file-pdf-o"></i> PDF</a></li>
+			<li><a href="${pageContext.request.contextPath}/attachment/conference/${conference.id}/${conference.pdf}"><i class="fa fa-fw fa-file-pdf-o"></i> PDF</a></li>
 		</ul>
 		</div>
 		<div id="preface" class="preface">

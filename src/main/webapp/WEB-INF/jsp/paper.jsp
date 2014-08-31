@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <html lang="en">
-<jsp:include page="fragments/head.jsp" />
+<jsp:include page="fragments/paper_head.jsp" />
 
 <body>
 
@@ -66,7 +66,7 @@
 						<c:if test="${hasAttachments}">
 							<p>
 								<a
-									href="${pageContext.request.contextPath}/attachment/paper/${paper.id}"><i
+									href="${pageContext.request.contextPath}/attachment/paper/${paper.id}/${paper.pdf}"><i
 									class="fa fa-fw fa-file-pdf-o"></i> PDF</a>
 							</p>
 						</c:if>

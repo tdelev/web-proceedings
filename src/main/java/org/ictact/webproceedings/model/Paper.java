@@ -46,19 +46,14 @@ public class Paper extends BaseEntity {
 
 	@NotEmpty
 	private String keywords;
-	
-	@NotEmpty
-	private String pages;
+
+	private int pageFrom;
+
+	private int pageTo;
+
+	private String doi;
 
 	private String url;
-
-	public String getPages() {
-		return pages;
-	}
-
-	public void setPages(String pages) {
-		this.pages = pages;
-	}
 
 	public String getUrl() {
 		return url;
@@ -66,6 +61,30 @@ public class Paper extends BaseEntity {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public int getPageFrom() {
+		return pageFrom;
+	}
+
+	public void setPageFrom(int pageFrom) {
+		this.pageFrom = pageFrom;
+	}
+
+	public int getPageTo() {
+		return pageTo;
+	}
+
+	public void setPageTo(int pageTo) {
+		this.pageTo = pageTo;
+	}
+
+	public String getDoi() {
+		return doi;
+	}
+
+	public void setDoi(String doi) {
+		this.doi = doi;
 	}
 
 	public PaperType getType() {
@@ -108,9 +127,22 @@ public class Paper extends BaseEntity {
 		this.conference = conference;
 	}
 
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
 	@JsonIgnore
 	public String getTitleSlug() {
 		return SlugGenerator.toSlug(title);
+	}
+
+	@JsonIgnore
+	public String getPdf() {
+		return String.format("%s.pdf", getTitleSlug());
 	}
 
 	@JsonIgnore
@@ -118,12 +150,9 @@ public class Paper extends BaseEntity {
 		return paperAuthors.size();
 	}
 
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
+	@JsonIgnore
+	public String getPages() {
+		return String.format("%d-%d", pageFrom, pageTo);
 	}
 
 }

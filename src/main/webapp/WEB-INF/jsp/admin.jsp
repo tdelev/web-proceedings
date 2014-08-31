@@ -11,7 +11,7 @@
    
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.png">
 
-    <title>Web Proceedings</title>
+    <title>Web Proceedings - Admin</title>
 
     <!-- Bootstrap core CSS -->
     

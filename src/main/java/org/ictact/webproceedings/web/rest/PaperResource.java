@@ -64,4 +64,12 @@ public class PaperResource {
 		service.delete(id);
 	}
 
+	@RequestMapping(value = "/fix", method = RequestMethod.GET, produces = "application/json")
+	public void fix() {
+		List<Paper> papers = service.findAll();
+		for (Paper paper : papers) {
+
+		}
+	}
+
 }

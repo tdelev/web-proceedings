@@ -30,8 +30,8 @@ public class CitationManager {
 		sb.append(String.format("  journal={%s, Web Proceedings ISSN %s}\n",
 				paper.getConference().getTitle(), paper.getConference()
 						.getIssn()));
-		sb.append(String.format("  pages={%s}\n",
-				paper.getPages().replace("-", "--")));
+		sb.append(String.format("  pages={%d--%d}\n", paper.getPageFrom(),
+				paper.getPageTo()));
 		sb.append(String.format("  year={%s}\n", paper.getConference()
 				.getYear()));
 		sb.append("}");

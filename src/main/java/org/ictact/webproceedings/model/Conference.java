@@ -1,5 +1,6 @@
 package org.ictact.webproceedings.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -138,6 +139,16 @@ public class Conference extends BaseEntity implements Comparable<Conference> {
 		cal.setTime(dateTo);
 		String year = Integer.toString(cal.get(Calendar.YEAR));
 		return year;
+	}
+
+	@JsonIgnore
+	public String getPdf() {
+		return String.format("%s-web-proceedings.pdf", getTitleSlug());
+	}
+
+	@JsonIgnore
+	public String getDate() {
+		return new SimpleDateFormat("yyyy/MM/dd/").format(dateFrom);
 	}
 
 	@Override

@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.ictact.webproceedings.model.AAttachment;
+import org.ictact.webproceedings.model.Conference;
 import org.ictact.webproceedings.model.ConferenceAttachment;
+import org.ictact.webproceedings.model.Paper;
 import org.ictact.webproceedings.model.PaperAttachment;
 import org.ictact.webproceedings.service.AttachmentService;
 import org.ictact.webproceedings.service.ConferenceAttachmentService;
+import org.ictact.webproceedings.service.ConferenceService;
 import org.ictact.webproceedings.service.PaperAttachmentService;
+import org.ictact.webproceedings.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,46 +36,59 @@ public class AttachmentController {
 	@Autowired
 	private ConferenceAttachmentService caService;
 
+	@Autowired
+	private PaperService paperService;
+
+	@Autowired
+	private ConferenceService conferenceService;
+
 	@RequestMapping(value = "/attachment/{id}", method = RequestMethod.GET)
 	public String download(@PathVariable("id") Long id,
 			HttpServletResponse response) {
 		AAttachment attachment = attachmentService.findById(id);
-		writeFileToResponse(attachment, response);
+		writeFileToResponse(attachment, response, "attach");
+
 		return null;
 	}
 
-	@RequestMapping(value = "/attachment/paper/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/attachment/paper/{id}/{\\S+}", method = RequestMethod.GET)
 	public String downloadPaper(@PathVariable("id") Long id,
 			HttpServletResponse response) {
-		List<PaperAttachment> pa = paService.findByObjectId(id);
-		if (pa != null && pa.size() > 0) {
-			PaperAttachment file = pa.get(0);
-			if (file != null) {
-				writeFileToResponse(file, response);
+		Paper paper = paperService.findById(id);
+		if (paper != null) {
+			List<PaperAttachment> pa = paService.findByObjectId(id);
+			if (pa != null && pa.size() > 0) {
+				PaperAttachment file = pa.get(0);
+				if (file != null) {
+					writeFileToResponse(file, response, paper.getPdf());
+				}
 			}
 		}
 		return null;
 	}
 
-	@RequestMapping(value = "/attachment/conference/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/attachment/conference/{id}/{\\S+}", method = RequestMethod.GET)
 	public String downloadProceedings(@PathVariable("id") Long id,
 			HttpServletResponse response) {
-		List<ConferenceAttachment> ca = caService.findByObjectId(id);
-		if (ca != null && ca.size() > 0) {
-			ConferenceAttachment file = ca.get(0);
-			if (file != null) {
-				writeFileToResponse(file, response);
+		Conference conference = conferenceService.findById(id);
+		if (conference != null) {
+			List<ConferenceAttachment> ca = caService.findByObjectId(id);
+			if (ca != null && ca.size() > 0) {
+				ConferenceAttachment file = ca.get(0);
+				if (file != null) {
+					writeFileToResponse(file, response, conference.getPdf());
+				}
 			}
 		}
 		return null;
 	}
 
 	private void writeFileToResponse(AAttachment attachment,
-			HttpServletResponse response) {
+			HttpServletResponse response, String fileName) {
 		try {
 			OutputStream out = response.getOutputStream();
 			String contentDisposition = String.format("inline;filename=\"%s\"",
-					attachment.getFileName());
+					fileName);
 			response.setHeader("Content-Disposition", contentDisposition);
 			response.setContentType(attachment.getContentType());
 			response.setContentLength((int) attachment.getData().length());
