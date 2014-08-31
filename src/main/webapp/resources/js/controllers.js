@@ -23,7 +23,7 @@ WP.controller('AuthorsController', [
           page: 1,
           count: 10,
           sorting: {
-            firstName: 'asc' // initial sorting
+            id: 'desc' // initial sorting
           }
         };
         $scope.table = new ngTableParams(tableParams, {
@@ -88,6 +88,9 @@ WP.controller('ConferencesController', [
         var tableParams = {
           page: 1,
           count: 10,
+          sorting: {
+            id: 'desc' // initial sorting
+          }
         };
         $scope.table = new ngTableParams(tableParams, {
           total: $scope.conferences.length, // length of data
@@ -120,9 +123,12 @@ WP.controller('ConferencesController', [
 
       $scope.save = function() {
         Conference.save($scope.conference, function(conference) {
-          $scope.conferences = Conference.query();
-          $scope.conference = {};
+          $scope.modalCreate.hide();
           toaster.pop('success', 'Success', 'Conference saved');
+          Conference.query(function(data) {
+            $scope.conferences = data;
+            $scope.table.reload();
+          });
         });
       };
 
@@ -145,7 +151,6 @@ WP.controller('ConferencesController', [
             $scope.conferences = data;
             $scope.table.reload();
           });
-          $scope.conference = {};
         });
       };
 
@@ -414,12 +419,13 @@ WP.controller('ConferenceMetaController',
             'ConferenceMeta',
             'Conference',
             'toaster',
+
             function($scope, $routeParams, $modal, ConferenceMeta, Conference,
                     toaster) {
               $scope.conference = Conference.get({
                 id: $routeParams.id
               });
-              function initEditors() {
+              var initEditors = function() {
                 $("#preface").markdown({
                   autofocus: true,
                   savable: true,
@@ -441,7 +447,7 @@ WP.controller('ConferenceMetaController',
                     e.setContent($scope.meta.committees);
                   }
                 });
-              }
+              };
 
               ConferenceMeta.getByConferenceId({
                 id: $routeParams.id
