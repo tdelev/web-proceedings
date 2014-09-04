@@ -20,9 +20,13 @@
 					<a href="${pageContext.request.contextPath}/conferences/${latestConf.year}/${latestConf.id}">${latestConf.title}</a>
 				</h1>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<label>Editors</label>
 						<p class="list-group-item-text">${latestConf.editors}</p>
+					</div>
+					<div class="col-md-6">
+						<label>Venue</label>
+						<p class="list-group-item-text">${latestConf.venue}</p>
 					</div>
 				</div>
 				<div class="row">
@@ -31,8 +35,8 @@
 						<p class="list-group-item-text">${latestConf.topic}</p>
 					</div>
 					<div class="col-md-6">
-						<label>Venue</label>
-						<p class="list-group-item-text">${latestConf.venue}</p>
+						<label>Springer</label>
+						<p class="list-group-item-text"><a href="${latestConf.url}">${latestConf.series}</a></p>
 					</div>
 				</div>
 				</div>

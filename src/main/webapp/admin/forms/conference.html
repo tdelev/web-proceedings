@@ -49,7 +49,7 @@
 		ng-model="conference.venue" required>
 </div>
 <div class="form-group" ng-show="attachments.length">
-	<a href="{{ basePath }}/attachment/conference/{{conference.id}}"><i
+	<a href="{{ basePath }}/attachment/conference/{{conference.id}}/wp{{conference.id}}.pdf"><i
 		class="fa fa-fw fa-file-pdf-o"></i> Download</a>
 </div>
 <div class="form-group" ng-show="conference.id">

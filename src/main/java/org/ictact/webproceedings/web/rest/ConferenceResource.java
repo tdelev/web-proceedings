@@ -20,7 +20,7 @@ public class ConferenceResource {
 
 	@Autowired
 	private ConferenceService service;
-	
+
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public Conference create(@RequestBody @Valid Conference entity) {
 		service.save(entity);
@@ -29,7 +29,7 @@ public class ConferenceResource {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	public List<Conference> getAll() {
-		return service.findAll();
+		return service.findAllByOrderByDateFromDesc();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")

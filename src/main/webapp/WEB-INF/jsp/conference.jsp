@@ -17,25 +17,13 @@
 		<li  class="active">${conference.title}</li>
 	</ol>
 	<div class="page-header">
-  		<h1>${conference.title} <small>Web proceedings ${conference.issn}</small></h1>
-		<div class="conference-info">
-			<div class="row">
-				<div class="col-md-6">
-					<label>Editors</label>
-					<p class="paper-meta">${conference.editors}</p>
-				</div>
-				<div class="col-md-6">
-					<label>Topic</label>
-					<p class="paper-meta">${conference.topic}</p>
-				</div>
-			</div>
-		</div>
+  		<%@include file="fragments/conference_details.jsp" %>
 	</div>
 	<div class="paper-types">
 		<ul class="nav nav-pills">
-			<li><a href="#preface">Preface</a></li>
-			<li><a href="#committees">Committees</a></li>
-			<li><a href="${pageContext.request.contextPath}/conferences/${conference.year}/${conference.id}/papers">Papers</a></li>
+			<li><a href="#preface"><i class="fa fa-fw fa-envelope"></i> Preface</a></li>
+			<li><a href="#committees"><i class="fa fa-fw fa-group"></i> Committees</a></li>
+			<li><a href="${pageContext.request.contextPath}/conferences/${conference.year}/${conference.id}/papers"><i class="fa fa-fw fa-book"></i> Papers</a></li>
 			<li><a href="${pageContext.request.contextPath}/attachment/conference/${conference.id}/${conference.pdf}"><i class="fa fa-fw fa-file-pdf-o"></i> PDF</a></li>
 		</ul>
 		</div>

@@ -36,8 +36,8 @@
     <input type="number" class="form-control" id="pageTo" placeholder="Enter page to " ng-model="paper.pageTo" required>
   </div>
   <div class="form-group col-md-4">
-    <label for="number">Number (order)</label>
-    <input type="number" class="form-control" id="number" placeholder="Enter submission number " ng-model="paper.number" >
+    <label for="number">Number (order) *</label>
+    <input type="number" class="form-control" id="number" placeholder="Enter submission number " ng-model="paper.number" required>
   </div>
   </div>
   <div class="form-group">
@@ -49,7 +49,7 @@
     <input type="text" class="form-control" id="doi" placeholder="Enter DOI " ng-model="paper.doi" >
   </div>
   <div class="form-group" ng-show="attachments.length">
-  	<a href="{{ basePath }}/attachment/paper/{{paper.id}}"><i class="fa fa-fw fa-file-pdf-o"></i> Download</a>
+  	<a href="{{ basePath }}/attachment/paper/{{paper.id}}/paper{{paper.id}}.pdf"><i class="fa fa-fw fa-file-pdf-o"></i> Download</a>
   </div>
   <div class="form-group" ng-show="paper.id">
     <label for="file">File input</label>
